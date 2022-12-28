@@ -1,21 +1,23 @@
-import Vue from "vue";
-import Router from "vue-router";
+// import Vue from "vue";
+import { createRouter, createWebHistory } from 'vue-router';
 
-Vue.use(Router);
+// Vue.use(Router);
 
-export default new Router({
-  mode: "history",
-  routes: [
-    {
-      path: "/",
-      alias: "/home",
-      name: "home",
+const routes = [
+  {
+      path: '/',
       component: () => import("../components/HelloWorld")
-    },
-    // catch all 404
-    {
-        path: '/:catchAll(.*)',
-        component: () => import ("../components/NotFound")
-    }
-  ]
-});
+  },
+  // catch all 404
+  {
+      path: '/:catchAll(.*)',
+      component: () => import("../components/NotFound")
+  }
+];
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+export default router;

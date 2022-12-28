@@ -1,0 +1,25 @@
+{
+  "name": "extra_secure_forum",
+  "version": "1.0.0",
+  "description": "Web-App to illustrate different security vulnerabilities",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mariadb",
+    "rest",
+    "api"
+  ],
+  "author": "Frederik Kliemt",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mariadb": "^3.0.2",
+    "sequelize": "^6.28.0"
+  }
+}

@@ -10,12 +10,12 @@ export default new Router({
       path: "/",
       alias: "/home",
       name: "home",
-      component: () => import("./components/HomeView")
+      component: () => import("../components/HelloWorld")
     },
     // catch all 404
     {
         path: '/:catchAll(.*)',
-        component: () => import ("./components/NotFound")
+        component: () => import ("../components/NotFound")
     }
   ]
 });

@@ -46,13 +46,13 @@ router.get('/:id', async (req, res) => {
 // Save a User to the database
 router.post('/', async (req, res) =>{
     try {
-        const insertQuery = 'INSERT INTO detections VALUES (?, ?, ?, ?)';
+        const insertQuery = 'INSERT INTO Users VALUES (?, ?, ?, ?)';
 
-    con = await pool.getConnection();
+        con = await pool.getConnection();
 
-    const result = await con.query(insertQuery, [null, req.body.username, req.params.password, null]);
+        const result = await con.query(insertQuery, [null, req.body.username, req.params.password, null]);
 
-    res.status(201).send('Entry was successfully inserted')
+        res.status(201).send('Entry was successfully inserted')
     } catch (error) {
         res.status(400).send(error.message);
     }

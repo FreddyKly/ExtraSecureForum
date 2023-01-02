@@ -21,4 +21,21 @@ router.get('/', async (req, res) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-})
+});
+
+// Post
+// Save a post to the database
+router.post('/', async (req, res) =>{
+    try {
+        const insertQuery = 'INSERT INTO Posts VALUES (?, ?, ?, ?, ?)';
+
+        con = await pool.getConnection();
+
+        const result = await con.query(insertQuery, [null, req.body.title, req.params.post, null, null]);
+
+        res.status(201).send('Entry was successfully inserted')
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+    
+});

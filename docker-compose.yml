@@ -1,11 +1,12 @@
 version: '3.8'
 services:
-  client:
+  Frontend:
     build: ./Frontend
+    # command: npm run serve -- --public 0.0.0.0:8080 #Use this for hot-reload capabilities
     ports:
       - 8081:8081
 
-  server:
+  Backend:
     build: ./Backend
     depends_on:
       - mariadb

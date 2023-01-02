@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  client:
+    build: ./Frontend
+    ports:
+      - 8081:8081
+
+  server:
+    build: ./Backend
+    depends_on:
+      - mariadb
+    ports:
+      - 8080:8080
+
+  mariadb:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./Database:/var/lib/mysql
+      - ./Database/sql_scripts:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306

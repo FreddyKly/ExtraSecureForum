@@ -1,3 +1,4 @@
 node_modules
-/Database
+/Database/*
+!/Database/sql_scripts
 .vscode

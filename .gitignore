@@ -1,1 +1,3 @@
 node_modules
+/Database/*
+!/Database/sql_scripts

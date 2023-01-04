@@ -1,8 +1,12 @@
 const express = require('express');
-const pool = require('../../Database/connector');
+const pool = require('../Database/connector');
 
 const router = express.Router();
 
+
+router.get('/test', async (req, res) => {
+    res.send(200).message('Test successful!')
+})
 
 // Get
 // get the list of all Users

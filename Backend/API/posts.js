@@ -1,5 +1,5 @@
 const express = require('express');
-const pool = require('../../Database/connector');
+const pool = require('../Database/connector');
 
 const router = express.Router();
 
@@ -39,3 +39,5 @@ router.post('/', async (req, res) =>{
     }
     
 });
+
+module.exports = router;

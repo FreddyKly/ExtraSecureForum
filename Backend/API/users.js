@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/test', async (req, res) => {
-    res.send(200).message('Test successful!')
+    res.status(200).send('Test successful!')
 })
 
 // Get
@@ -24,6 +24,8 @@ router.get('/', async (req, res) => {
 
     } catch (error) {
         res.status(400).send(error.message);
+    }finally{
+        if (con) return con.end();
     }
 })
 
@@ -43,6 +45,8 @@ router.get('/:id', async (req, res) => {
 
     } catch (error) {
         res.status(400).send(error.message);
+    }finally{
+        if (con) return con.end();
     }
 })
 
@@ -59,6 +63,8 @@ router.post('/', async (req, res) =>{
         res.status(201).send('Entry was successfully inserted')
     } catch (error) {
         res.status(400).send(error.message);
+    }finally{
+        if (con) return con.end();
     }
     
 });
@@ -76,6 +82,8 @@ router.delete('/:id', async (req, res) =>{
     res.status(200).send()
     } catch (error) {
         res.status(400).send(error.message);
+    }finally{
+        if (con) return con.end();
     }
     
 });

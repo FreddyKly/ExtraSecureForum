@@ -9,16 +9,17 @@ CREATE TABLE IF NOT EXISTS `Users` (
 );
 CREATE TABLE IF NOT EXISTS `Answers` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+    `thread_id` INT NOT NULL,
     `post` TEXT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`thread_id`) REFERENCES Threads(`id`) ON DELETE CASCADE
 );
 CREATE TABLE IF NOT EXISTS `Threads` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-    `answers` FOREIGN,
     `title` TINYTEXT NOT NULL,
-    `text` TEXT NOT NULL,
+    `post` TEXT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
@@ -31,10 +32,17 @@ VALUES (
     "admin12345",
     DEFAULT
 );
-INSERT INTO SecureDatabase.Posts (title, post, created_at, updated_at)
+INSERT INTO SecureDatabase.Threads (title, post, created_at, updated_at)
 VALUES (
-    "Test-post!",
+    "Test-Thread!",
     "This is a test-post, so the database is not empty and throws weird errors!",
+    DEFAULT,
+    DEFAULT
+);
+INSERT INTO SecureDatabase.Answers (thread_id, post, created_at, updated_at)
+VALUES (
+    1,
+    "This is a test-answere, so the database is not empty and throws weird errors!",
     DEFAULT,
     DEFAULT
 );

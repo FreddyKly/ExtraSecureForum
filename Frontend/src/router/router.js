@@ -8,6 +8,11 @@ const routes = [
       path: '/',
       component: () => import("../components/HelloWorld")
   },
+
+  {
+    path: '/aNewSide',
+    component: () => import("../components/aNewSide")
+},
   // catch all 404
   {
       path: '/:catchAll(.*)',

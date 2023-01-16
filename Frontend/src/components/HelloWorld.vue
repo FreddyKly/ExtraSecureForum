@@ -8,16 +8,15 @@
         <v-spacer></v-spacer>
       </v-app-bar>
 
-      <v-container v-for="n in 8" :key="n" class="grey lighten-5 mb-6">
-        <v-row :align="align" no-gutters style="height: 150px;">
-          <v-col v-for="n in 1" :key="n">
-            <v-card class="mx-auto" max-width="900" outlined>
+      <v-container v-for="(item, n) in items" :key="n" class="grey lighten-5 mb-6">
+        <v-row :align="align" no-gutters style="height: 200px;" >
+          <v-col v-for="y in 1" :key="y">
+            <v-card class="mx-auto" max-width="900" outlined >
               <v-list-item three-line>
                 <v-list-item-content>
-                  <v-list-item-title class="text-h5 mb-1">
-                    NOTHING
+                  <v-list-item-title v-text="this.test" class="text-h5 mb-1">
                   </v-list-item-title>
-                  <v-list-item-subtitle>your text here</v-list-item-subtitle>
+                  <v-list-item-subtitle v-text="item.text"></v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
@@ -29,12 +28,12 @@
                 </v-btn>
 
 
-                <v-btn outlined rounded text @click="expand = !expand">
+                <v-btn outlined rounded text @click="item.expand = !item.expand">
                   Post
                 </v-btn>
 
                 <v-expand-transition>
-                  <v-card  v-show="expand" class="mx-auto secondary" max-width="900">
+                  <v-card v-show="item.expand" class="mx-auto secondary" max-width="900">
                     <v-textarea name="input-7-1" filled label="Your Text here" auto-grow>
                     </v-textarea>
                   </v-card>
@@ -53,16 +52,33 @@
 </template>
 
 <script>
+import userService from "@/services/userService.js";
+
 export default {
+
+  async created(){
+    try{
+      this.test= await userService.getUser()
+      console.log(this.test);
+    }catch(error){
+      console.log(error);
+    }
+  },
+
   name: "HelloWorld",
   data: () => ({
-    test: 'hello',
+    test:"",
     alignments: [
       'start',
       'center',
       'end',
     ],
-    expand: false,
+    items: [
+      { text: 'I hate my life', expand: false, },
+      { text: 'This is pain', expand: false, },
+      { text: 'Get me out of here', expand: false, },
+      { text: 'Why do I exist', expand: false, },
+    ],
   }),
 }
 

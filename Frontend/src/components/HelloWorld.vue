@@ -8,15 +8,15 @@
         <v-spacer></v-spacer>
       </v-app-bar>
 
-      <v-container v-for="(item, n) in items" :key="n" class="grey lighten-5 mb-6">
+      <v-container v-for="(post, n) in listOfPosts" :key="n" class="grey lighten-5 mb-6">
         <v-row :align="align" no-gutters style="height: 200px;" >
           <v-col v-for="y in 1" :key="y">
             <v-card class="mx-auto" max-width="900" outlined >
               <v-list-item three-line>
                 <v-list-item-content>
-                  <v-list-item-title v-text="this.test" class="text-h5 mb-1">
+                  <v-list-item-title v-text="post.title" class="text-h5 mb-1">
                   </v-list-item-title>
-                  <v-list-item-subtitle v-text="item.text"></v-list-item-subtitle>
+                  <v-list-item-subtitle v-text="post.post"></v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
@@ -28,17 +28,16 @@
                 </v-btn>
 
 
-                <v-btn outlined rounded text @click="item.expand = !item.expand">
+                <v-btn outlined rounded text @click="post.expand = !post.expand">
                   Post
                 </v-btn>
 
                 <v-expand-transition>
-                  <v-card v-show="item.expand" class="mx-auto secondary" max-width="900">
+                  <v-card v-show="post.expand" class="mx-auto secondary" max-width="900">
                     <v-textarea name="input-7-1" filled label="Your Text here" auto-grow>
                     </v-textarea>
                   </v-card>
                 </v-expand-transition>
-
 
                 <div class="mx-4 hidden-sm-and-down"></div>
 
@@ -53,6 +52,7 @@
 
 <script>
 import userService from "@/services/userService.js";
+import postService from "@/services/postService.js"
 
 export default {
 
@@ -63,11 +63,24 @@ export default {
     }catch(error){
       console.log(error);
     }
+
+    try{
+      this.listOfPosts= await postService.getPostList();
+      this.listOfPosts.forEach(element => {
+       element.concat(this.expand);
+      });
+      console.log(this.listOfPosts);
+    }catch(error){
+      console.log(error);
+    }
+
   },
 
   name: "HelloWorld",
   data: () => ({
     test:"",
+    expand: false,
+    listOfPosts: [],
     alignments: [
       'start',
       'center',

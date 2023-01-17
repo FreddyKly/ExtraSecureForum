@@ -10,9 +10,9 @@ router.get('/test', async (req, res) => {
 })
 
 // Get
-// get the list of all Users with passwords (not sure if we ever need this endpoint but we got it for now).
+// Get the list of all Users with passwords (not sure if we ever need this endpoint but we got it for now).
 // If we need it I'm throwing out the passwords ^^
-// returns: JSON, something like this: [{"id": 1, "username": "Admin", "passw": "12345", "created_at": "2023-01-17T18:33:47.000Z"}, {...}]
+// Returns: JSON, something like this: [{"id": 1, "username": "Admin", "passw": "12345", "created_at": "2023-01-17T18:33:47.000Z"}, {...}]
 router.get('/', async (req, res) => {
     try {
         console.log('Registered a Get-Request for all users!')

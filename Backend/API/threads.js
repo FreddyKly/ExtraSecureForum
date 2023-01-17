@@ -5,7 +5,8 @@ const router = express.Router();
 
 
 // Get
-// get the list of all Threads
+// Get the list of all Threads
+// Returns: JSON like this [{"id":1,"title":"Test-Thread!","post":"test post","created_at":"2023-01-17T18:33:47.000Z","updated_at":"2023-01-17T18:33:47.000Z"},{...}]
 router.get('/', async (req, res) => {
     try {
         console.log('Registered a Get-Request for all Threads!')
@@ -26,7 +27,8 @@ router.get('/', async (req, res) => {
 });
 
 
-// Get a single Thread
+// Get a single Thread (without the answers)
+// Returns: JSON like this [{"id":1,"title":"Test-Thread!","post":"test post","created_at":"2023-01-17T18:33:47.000Z","updated_at":"2023-01-17T18:33:47.000Z"}]
 router.get('/:id', async (req, res) => {
     try {
         console.log('Registered a Get-Request for a single Thread!')
@@ -47,7 +49,9 @@ router.get('/:id', async (req, res) => {
 });
 
 // Post
-// Save a post to the database
+// Save a Thread to the database
+// Use it by sending a POST-Request with a body that holds JSON with the relevant Data.
+// The Body may look like this: {"title": "thread title", "post": "thread post"}
 router.post('/', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a single Thread!')

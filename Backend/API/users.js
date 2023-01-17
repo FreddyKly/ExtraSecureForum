@@ -34,7 +34,7 @@ router.get('/', async (req, res) => {
 
 // Get information about a single user (with password). Again, let me know if we need an Endpoint like this.
 // Reach this Endpoint for example like this: http://localhost:8080/api/users/2
-// Returns: JSON of a single user. [{"id": 1, "username": "Admin", "passw": "12345", "created_at": "2023-01-17T18:33:47.000Z"}]
+// Returns: JSON of a single user. [{"id": 2, "username": "Admin", "passw": "12345", "created_at": "2023-01-17T18:33:47.000Z"}]
 router.get('/:id', async (req, res) => {
     try {
         console.log('Registered a Get-Request for a single user!')

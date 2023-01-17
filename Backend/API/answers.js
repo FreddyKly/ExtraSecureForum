@@ -5,6 +5,9 @@ const router = express.Router();
 
 // Get
 // get the list of all answers that belong to a thread with the id "id"
+// Reach this Endpoint for example like this: http://localhost:8080/api/answers/2
+// Returns: JSON of all answers belonging to Thread of e.g. id = 2. 
+// [{"id":2,"thread_id":2,"post":"answer_test","created_at":"2023-01-17T22:23:09.000Z","updated_at":"2023-01-17T22:23:09.000Z"}]
 router.get('/:id', async (req, res) => {
     try {
         console.log('Registered a Get-Request for all Answers to a Thread!')
@@ -26,6 +29,8 @@ router.get('/:id', async (req, res) => {
 
 // Post
 // Save an answer to the database that belongs to a thread
+// Use it by sending a POST-Request with a body that holds JSON with the relevant Data.
+// The Body may look like this: {"thread_id": "2", "post": "answer to a thread"}
 router.post('/', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a single Answere!')

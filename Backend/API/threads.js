@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     try {
         console.log('Registered a Get-Request!')
 
-        const selectAllQuery = 'SELECT * FROM Posts';
+        const selectAllQuery = 'SELECT * FROM Threads';
 
         con = await pool.getConnection();
 
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 // Save a post to the database
 router.post('/', async (req, res) =>{
     try {
-        const insertQuery = 'INSERT INTO Posts VALUES (?, ?, ?, ?, ?)';
+        const insertQuery = 'INSERT INTO Threads VALUES (?, ?, ?, ?, ?)';
 
         con = await pool.getConnection();
 

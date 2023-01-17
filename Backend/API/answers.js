@@ -19,6 +19,8 @@ router.get('/:id', async (req, res) => {
 
     } catch (error) {
         res.status(400).send(error.message);
+    }finally{
+        if (con) return con.end();
     }
 });
 
@@ -32,12 +34,14 @@ router.post('/', async (req, res) =>{
 
         con = await pool.getConnection();
 
-        const result = await con.query(insertThreadQuery, [null, req.body.thread_id, req.body.post, null, null]);
+        const result = await con.query(insertThreadQuery, [null, req.body.thread_id, req.body.post, new Date(), new Date()]);
 
         res.status(201).send('Entry was successfully inserted')
 
     } catch (error) {
         res.status(400).send(error.message);
+    }finally{
+        if (con) return con.end();
     }
     
 });

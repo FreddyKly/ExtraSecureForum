@@ -56,12 +56,13 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a single user!')
+        console.log(req.body)
 
         const insertQuery = 'INSERT INTO Users VALUES (?, ?, ?, ?)';
 
         con = await pool.getConnection();
 
-        const result = await con.query(insertQuery, [null, req.body.username, req.body.password, null]);
+        const result = await con.query(insertQuery, [null, req.body.username, req.body.password, new Date()]);
 
         res.status(201).send('Entry was successfully inserted')
     } catch (error) {

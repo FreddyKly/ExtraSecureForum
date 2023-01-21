@@ -20,24 +20,33 @@
 
       <v-expand-transition>
         <v-card v-show="this.thread.expand" class="mx-auto secondary" max-width="900">
-          <v-textarea name="input-7-1" filled label="Your Text here" auto-grow>
+          <v-textarea v-model="newPost" filled label="Your Text here" auto-grow>
           </v-textarea>
+          <v-card-actions>
+            <v-btn outlined rounded text @click="savePost">
+              Confirm
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-expand-transition>
 
       <div class="mx-4 hidden-sm-and-down"></div>
     </v-card-actions>
+
+    
+
   </v-card>
 </template>
 
 <script>
+import postService from "@/services/postService";
 import threadService from "@/services/threadService.js"
 export default {
   async created() {
     try {
-      const threadId = window.location.pathname.split('/')[2];
+      this.threadId = window.location.pathname.split('/')[2];
 
-      this.listOfPosts = await threadService.getThread(threadId);
+      this.listOfPosts = await threadService.getThread(this.threadId);
       this.listOfPosts.concat(this.expand);
 
       this.thread = this.listOfPosts[0],
@@ -48,10 +57,26 @@ export default {
       console.log(error);
     }
   },
+
+
   data: () => ({
+    threadId:"",
+    contentToPost:"",
     expand: false,
     listOfPosts: [],
     thread: [],
-  })
+  }),
+
+  mounted(){
+    this.contentToPost = this.newPost;
+  },
+  methods:{
+    savePost(){
+      console.log(this.newPost);
+      postService.postAwnser({"thread_id":this.threadId, "post":this.newPost})
+
+
+    }
+  }
 }
 </script>

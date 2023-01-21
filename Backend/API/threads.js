@@ -56,11 +56,11 @@ router.post('/', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a single Thread!')
 
-        const insertThreadQuery = 'INSERT INTO Threads VALUES (?, ?, ?, ?, ?)';
+        const insertThreadQuery = 'INSERT INTO Threads VALUES (NULL, ?, ?, DEFAULT, DEFAULT)';
 
         con = await pool.getConnection();
 
-        const result = await con.query(insertThreadQuery, [null, req.body.title, req.body.post, new Date(), new Date() ]);
+        const result = await con.query(insertThreadQuery, [req.body.title, req.body.post]);
 
         res.status(201).send('Entry was successfully inserted')
 

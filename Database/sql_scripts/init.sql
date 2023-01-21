@@ -41,6 +41,13 @@ VALUES (
     DEFAULT,
     DEFAULT
 );
+INSERT INTO SecureDatabase.Threads (title, post, created_at, updated_at)
+VALUES (
+    "Test-Thread! 2",
+    "This is a SECOND test-post, so the database is not empty and throws weird errors!",
+    DEFAULT,
+    DEFAULT
+);
 INSERT INTO SecureDatabase.Answers (thread_id, post, created_at, updated_at)
 VALUES (
     1,

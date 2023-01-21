@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 // Vue.use(Router);
 
+
 const routes = [
   {
       path: '/',
@@ -10,7 +11,7 @@ const routes = [
   },
 
   {
-    path: '/aNewSide',
+    path: '/aNewSide/:id',
     component: () => import("../components/aNewSide")
 },
   // catch all 404

@@ -23,7 +23,7 @@
               </v-list-item>
 
               <v-card-actions>
-                <v-btn outlined rounded text @click="$router.push('/aNewSide')">
+                <v-btn outlined rounded text @click="$router.push('/aNewSide/'+ post.id.toString())">
                   View
                 </v-btn>
 
@@ -52,7 +52,7 @@
 
 <script>
 import userService from "@/services/userService.js";
-import postService from "@/services/postService.js"
+import threadService from "@/services/threadService.js"
 
 export default {
 
@@ -65,11 +65,13 @@ export default {
     }
 
     try{
-      this.listOfPosts= await postService.getPostList();
+      this.listOfPosts= await threadService.getThreadList();
+      console.log(this.listOfPosts);
+
       this.listOfPosts.forEach(element => {
+        console.log(element.id);
        element.concat(this.expand);
       });
-      console.log(this.listOfPosts);
     }catch(error){
       console.log(error);
     }

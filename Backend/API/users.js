@@ -62,13 +62,16 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a single user!')
-        console.log(req.body)
+        
+        const salt = bcrypt.genSalt()
+
+        const hashedPassword = await bcrypt.hash(req.body.password, salt)
 
         const insertQuery = 'INSERT INTO Users VALUES (NULL, ?, ?, DEFAULT)';
 
         con = await pool.getConnection();
 
-        const result = await con.query(insertQuery, [req.body.username, req.body.password]);
+        const result = await con.query(insertQuery, [req.body.username, hashedPassword]);
 
         res.status(201).send('Entry was successfully inserted')
     } catch (error) {

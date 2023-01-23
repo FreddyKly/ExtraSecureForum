@@ -80,6 +80,18 @@ router.post('/', async (req, res) =>{
     
 });
 
+// login a user
+router.post('/login', async (req, res) =>{
+    try {
+        console.log('Registered a Post-Request for a login!')
+    } catch (error) {
+        res.status(400).send(error.message);
+    }finally{
+        if (con) return con.end();
+    }
+    
+});
+
 // Delete
 // I don't think we'll use this, but it's here
 router.delete('/:id', async (req, res) =>{

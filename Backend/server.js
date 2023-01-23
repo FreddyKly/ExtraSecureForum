@@ -16,9 +16,9 @@ app.use(express.json({limit: "10mb", extended: true}))
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({limit: "10mb", extended: true, parameterLimit: 50000}))
 
+const users = require('./API/users');
 const threads = require('./API/threads');
 const answers = require('./API/answers');
-const login = require('./API/login');
 
 app.use('/api/users', users);
 app.use('/api/threads', threads);

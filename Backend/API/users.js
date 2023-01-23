@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../Database/connector');
+const bcrypt = require('bcrypt')
 
 const router = express.Router();
 
@@ -10,14 +11,13 @@ router.get('/test', async (req, res) => {
 })
 
 // Get
-// Get the list of all Users with passwords (not sure if we ever need this endpoint but we got it for now).
-// If we need it I'm throwing out the passwords ^^
-// Returns: JSON, something like this: [{"id": 1, "username": "Admin", "passw": "12345", "created_at": "2023-01-17T18:33:47.000Z"}, {...}]
+// Get the list of all Users.
+// Returns: JSON, something like this: [{"id": 1, "username": "Admin", "created_at": "2023-01-17T18:33:47.000Z"}, {...}]
 router.get('/', async (req, res) => {
     try {
         console.log('Registered a Get-Request for all users!')
 
-        const selectAllQuery = 'SELECT * FROM Users';
+        const selectAllQuery = 'SELECT username, created_at FROM Users';
 
         con = await pool.getConnection();
 
@@ -62,6 +62,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a single user!')
+        
         console.log(req.body)
 
         const insertQuery = 'INSERT INTO Users VALUES (NULL, ?, ?, DEFAULT)';

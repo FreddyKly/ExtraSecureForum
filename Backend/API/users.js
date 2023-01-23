@@ -1,6 +1,6 @@
 const express = require('express');
 const pool = require('../Database/connector');
-const bcrypt = require('bcrypt')
+const {createHash} = require('crypto')
 
 const router = express.Router();
 
@@ -63,13 +63,13 @@ router.post('/', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a single user!')
         
-        console.log(req.body)
+        hashedPassword = createHash('sha256').update(string).digest('hex');
 
         const insertQuery = 'INSERT INTO Users VALUES (NULL, ?, ?, DEFAULT)';
 
         con = await pool.getConnection();
 
-        const result = await con.query(insertQuery, [req.body.username, req.body.password]);
+        const result = await con.query(insertQuery, [req.body.username, hashedPassword]);
 
         res.status(201).send('Entry was successfully inserted')
     } catch (error) {

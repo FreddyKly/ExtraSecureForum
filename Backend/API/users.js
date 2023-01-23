@@ -63,7 +63,7 @@ router.post('/', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a single user!')
         
-        hashedPassword = createHash('sha256').update(string).digest('hex');
+        hashedPassword = createHash('sha256').update(req.body.password).digest('hex');
 
         const insertQuery = 'INSERT INTO Users VALUES (NULL, ?, ?, DEFAULT)';
 
@@ -84,6 +84,22 @@ router.post('/', async (req, res) =>{
 router.post('/login', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a login!')
+
+        const fetchQuery = 'SELECT * FROM Users WHERE username="' + req.body.username + '"'
+
+        con = await pool.getConnection();
+
+        const user = await con.query(fetchQuery);
+
+        if (user == null) {
+            return res.status(400).send('Username could not be found!')
+        }
+
+        if (createHash('sha256').update(req.body.password).digest('hex') != user.passw) {
+            return res.status(400).send('Wrong password!')
+        }
+
+        res.status(200).send("Login Successful")
     } catch (error) {
         res.status(400).send(error.message);
     }finally{

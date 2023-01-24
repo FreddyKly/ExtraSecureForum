@@ -95,9 +95,13 @@ router.post('/login', async (req, res) =>{
             return res.status(400).send('Username could not be found!')
         }
 
-        if (createHash('sha256').update(req.body.password).digest('hex') != user.passw) {
+        if (createHash('sha256').update(req.body.password).digest('hex') != user[0].passw) {
+            console.log(createHash('sha256').update(req.body.password).digest('hex'), user[0].passw)
             return res.status(400).send('Wrong password!')
         }
+
+        req.session.loggedin = true
+        req.session.username = req.body.username
 
         res.status(200).send("Login Successful")
     } catch (error) {

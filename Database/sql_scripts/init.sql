@@ -3,7 +3,7 @@ USE SecureDatabase;
 CREATE TABLE IF NOT EXISTS `Users` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(20) NOT NULL,
-    `passw` VARCHAR(30) NOT NULL,
+    `passw` varchar(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     PRIMARY KEY (`id`)
 );

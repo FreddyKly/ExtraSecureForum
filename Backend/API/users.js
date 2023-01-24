@@ -80,7 +80,10 @@ router.post('/', async (req, res) =>{
     
 });
 
-// login a user
+// Login a User with a password
+// Use it by sending a POST-Request with a body that holds JSON with the relevant Data.
+// The Body may look like this: {"username": "username_test", "password": "password_test"}
+// The user will get a Session-ID in his cookies to stay logged in
 router.post('/login', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a login!')

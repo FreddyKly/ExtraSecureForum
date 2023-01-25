@@ -93,13 +93,15 @@ router.post('/login', async (req, res) =>{
         con = await pool.getConnection();
 
         const user = await con.query(fetchQuery);
-
+console.log("first breakpoint "+ user);
         if (user == null) {
+            console.log("second breakpoint");
             return res.status(400).send('Username could not be found!')
         }
 
         if (createHash('sha256').update(req.body.password).digest('hex') != user[0].passw) {
             console.log(createHash('sha256').update(req.body.password).digest('hex'), user[0].passw)
+            console.log("third breakpoint")
             return res.status(400).send('Wrong password!')
         }
 
@@ -108,6 +110,7 @@ router.post('/login', async (req, res) =>{
 
         res.status(200).send("Login Successful")
     } catch (error) {
+        console.log("fourth breakpoint");
         res.status(400).send(error.message);
     }finally{
         if (con) return con.end();

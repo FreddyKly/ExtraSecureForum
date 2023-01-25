@@ -9,7 +9,7 @@
             :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1" counter
             @click:append="show2 = !show2"></v-text-field>
         </v-col>
-        <v-btn outlined rounded text @click="Login(); this.$router.push('/')">
+        <v-btn outlined rounded text @click="Login();">
           Login
         </v-btn>
 
@@ -37,9 +37,13 @@ export default {
     this.password = this.loginPassword
   },
   methods: {
-    Login() {
-      userService.loginUser({ "username": this.accountname, "password": this.password })
+    async Login() {
+      try{
+      await userService.loginUser({ "username": this.accountname, "password": this.password })
+    }catch(e){
+     console.log(e); 
     }
+  }
   }
 }
 </script>

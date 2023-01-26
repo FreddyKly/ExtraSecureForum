@@ -48,9 +48,10 @@
       </v-menu>
     </v-app-bar>
 
-
-  <v-card class="mx-auto" max-width="900" outlined>
+  <v-card class="mt-5 mx-auto" max-width="900">
+    <v-card>
     <v-list-item three-line>
+      
       <v-list-item-content>
         <div v-text="this.thread.title" class="text-overline mb-4">
 
@@ -59,13 +60,15 @@
         </v-list-item-title>
         <v-list-item-subtitle v-text="this.thread.post"></v-list-item-subtitle>
       </v-list-item-content>
+    
 
       <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
     </v-list-item>
+  </v-card>
 
     <v-card-actions>
-      <v-btn outlined rounded text @click="this.thread.expand = !this.thread.expand">
-        Post
+      <v-btn variant="elevated" elevation="3" @click="this.thread.expand = !this.thread.expand">
+        Answere
       </v-btn>
 
       <v-expand-transition>
@@ -73,7 +76,7 @@
           <v-textarea v-model="newPost" filled label="Your Text here" auto-grow>
           </v-textarea>
           <v-card-actions>
-            <v-btn outlined rounded text @click="savePost(); this.$router.go()">
+            <v-btn rounded @click="savePost(); this.$router.go()">
               Confirm
             </v-btn>
           </v-card-actions>
@@ -83,9 +86,9 @@
       <div class="mx-4 hidden-sm-and-down"></div>
     </v-card-actions>
     <v-container v-for="(post, n) in listofAnwsers" :key="n" class="grey lighten-5 mb-6">
-      <v-row :align="align" no-gutters style="height: 200px;">
+      <v-row :align="align" no-gutters style="height: 100%;">
         <v-col v-for="y in 1" :key="y">
-          <v-card class="mx-auto" max-width="900" outlined>
+          <v-card class="mx-auto" max-width="900" elevation="2">
             <v-list-item three-line>
               <v-list-item-content>
                 <v-list-item-subtitle v-html="post.post"></v-list-item-subtitle>

@@ -23,7 +23,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-btn rounded @click="Login();" color="deep-purple accent-4">
+        <v-btn rounded @click="Login();" color="#ffa31a">
           Login
         </v-btn>
       </v-row>

@@ -1,91 +1,49 @@
 <template>
     <v-app>
-      <v-app-bar
-      color="deep-purple accent-4"
-      dense
-      dark
-    >
-      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
-
-      <v-app-bar-title style="cursor: pointer" @click="$router.go()">ExtraSecureForum</v-app-bar-title>
+      <v-app-bar color="#ffa31a" dense dark>
+      <v-app-bar-title class="font-weight-bold text-black" style="cursor: pointer" @click="$router.go()">ExtraSecureForum</v-app-bar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon stacked>
+      <v-btn icon stacked class="text-black">
         Register
-        <v-icon>mdi-account-plus</v-icon>
+        <v-icon @click="$router.push('/RegisterPage')">mdi-account-plus</v-icon>
       </v-btn>
 
-      <v-btn icon stacked>
+      <v-btn icon stacked class="text-black">
         Login
         <v-icon @click="$router.push('/LoginPage')" >mdi-login</v-icon>
       </v-btn>
-
-      <v-menu
-        left
-        bottom
-      >
-        <!-- <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template> -->
-
-        <v-list>
-          <v-list-item
-            v-for="n in 5"
-            :key="n"
-            @click="() => {}"
-          >
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
     </v-app-bar>
 
-
-      <v-container v-for="(post, n) in listOfPosts" :key="n" class="grey lighten-5 mb-6">
+      <v-container v-for="(post, n) in listOfPosts" :key="n" class="grey lighten-5 mb-2">
         <v-row :align="align" no-gutters style="height: 100%;">
           <v-col v-for="y in 1" :key="y">
-            <v-card class="mx-auto" max-width="900" outlined @click="$router.push('/aNewSide/'+ post.id.toString())">
+            <v-card class="mx-auto" max-width="900" outlined @click="$router.push('/Thread/'+ post.id.toString())">
               <v-list-item three-line>
                 <v-list-item-content>
-                  <v-list-item-title v-text="post.title" class="text-h5 mb-1">
+                  <v-list-item-title v-text="post.title" class="text-h5 ma-5">
                   </v-list-item-title>
                   <v-list-item-subtitle v-text="post.post"></v-list-item-subtitle>
                 </v-list-item-content>
 
                 <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
               </v-list-item>
-
-              <!-- <v-card-actions>
-                <v-btn outlined rounded text @click="$router.push('/aNewSide/'+ post.id.toString())">
-                  View
-                </v-btn>
-
-
-                <v-btn outlined rounded text @click="post.expand = !post.expand">
-                  Post
-                </v-btn>
-
-                <v-expand-transition>
-                  <v-card v-show="post.expand" class="mx-auto secondary" max-width="900">
-                    <v-textarea name="input-7-1" filled label="Your Text here" auto-grow>
-                    </v-textarea>
-                  </v-card>
-                </v-expand-transition>
-
-                <div class="mx-4 hidden-sm-and-down"></div>
-
-              </v-card-actions> -->
             </v-card>
           </v-col>
-        </v-row>
+        </v-row>   
       </v-container>
+      <div>
+        <v-btn
+                  color="#ffa31a"
+                  fab
+                  dark
+                  small
+                  absolute
+                  bottom
+                  right
+                ><v-icon>mdi-plus</v-icon></v-btn>
+      </div>
     </v-app>
 </template>
 

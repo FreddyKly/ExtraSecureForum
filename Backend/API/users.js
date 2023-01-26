@@ -93,7 +93,7 @@ router.post('/login', async (req, res) =>{
         con = await pool.getConnection();
 
         const user = await con.query(fetchQuery);
-console.log("first breakpoint "+ user);
+        console.log("first breakpoint "+ user[0]);
         if (user == null) {
             console.log("second breakpoint");
             return res.status(400).send('Username could not be found!')
@@ -101,7 +101,7 @@ console.log("first breakpoint "+ user);
 
         if (createHash('sha256').update(req.body.password).digest('hex') != user[0].passw) {
             console.log(createHash('sha256').update(req.body.password).digest('hex'), user[0].passw)
-            console.log("third breakpoint")
+            console.log("third breakpoint", user)
             return res.status(400).send('Wrong password!')
         }
 

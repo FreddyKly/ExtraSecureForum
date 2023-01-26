@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `Answers` (
 INSERT INTO SecureDatabase.Users (username, passw, created_at)
 VALUES (
     "admin",
-    "2e4a37f6a4fffd967835c4bb12cfe8a94caa1cb5b1172f890f51317894d1723d",
+    "41e5653fc7aeb894026d6bb7b2db7f65902b454945fa8fd65a6327047b5277fb",
     DEFAULT
 );
 INSERT INTO SecureDatabase.Threads (title, post, created_at, updated_at)

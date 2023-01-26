@@ -5,12 +5,15 @@
       <v-row>
         <v-col>
           <v-text-field
+            v-model="accountname"
             prepend-icon="mdi-account"
             name="login"
             label="Login"
             type="text"
+            required
           ></v-text-field>
           <v-text-field
+            v-model="password"
             id="password"
             prepend-icon="mdi-lock"
             name="password"
@@ -18,6 +21,7 @@
             :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="() => (password = !password)"
             :type="password ? 'password' : 'text'"
+            required
           ></v-text-field>
         </v-col>
         <v-btn rounded @click="Login();">
@@ -35,17 +39,10 @@ export default {
   data() {
     return {
       accountname: "",
-      password: 'Password',
-      rules: {
-        emailMatch: () => (`The email and password you entered don't match`),
-      },
+      password: "",
     }
   },
 
-  mounted() {
-    this.accountname = this.loginAccountname;
-    this.password = this.loginPassword
-  },
   methods: {
     async Login() {
       try{

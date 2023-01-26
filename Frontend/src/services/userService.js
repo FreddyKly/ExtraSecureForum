@@ -21,10 +21,9 @@ class userService {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await axios.post(url+"/login", body );
+                const res = await axios.post(url + "/login", body );
                 const data = res.data;
-                resolve(
-                    data);
+                resolve(data);
             } catch (err) {
                 reject(err);
             }

@@ -1,5 +1,4 @@
 <template>
-  <div>
     <v-app>
       <v-app-bar
       color="deep-purple accent-4"
@@ -8,23 +7,25 @@
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Page title</v-toolbar-title>
+      <v-app-bar-title>Extra-Secure-Forum</v-app-bar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
+      <v-btn icon stacked>
+        Register
+        <v-icon>mdi-account-plus</v-icon>
       </v-btn>
 
-      <v-btn icon>
-        <v-icon @click="$router.push('/LoginPage')" >mdi-magnify</v-icon>
+      <v-btn icon stacked>
+        Login
+        <v-icon @click="$router.push('/LoginPage')" >mdi-login</v-icon>
       </v-btn>
 
       <v-menu
         left
         bottom
       >
-        <template v-slot:activator="{ on, attrs }">
+        <!-- <template v-slot:activator="{ on, attrs }">
           <v-btn
             icon
             v-bind="attrs"
@@ -32,7 +33,7 @@
           >
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
-        </template>
+        </template> -->
 
         <v-list>
           <v-list-item
@@ -86,7 +87,6 @@
         </v-row>
       </v-container>
     </v-app>
-  </div>
 </template>
 
 <script>

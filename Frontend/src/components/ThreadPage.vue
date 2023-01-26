@@ -25,7 +25,7 @@
 
         <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
         <div class="d-flex justify-start">
-        <v-btn class="red--text text--lighten-1" variant="elevated" elevation="3" @click="this.thread.expand = !this.thread.expand">
+        <v-btn class="button" variant="elevated" elevation="3" @click="this.thread.expand = !this.thread.expand">
         Answere
       </v-btn>
     </div>
@@ -36,8 +36,8 @@
     <v-card-actions>
 
       <v-expand-transition>
-        <v-card v-show="this.thread.expand" class="mx-auto secondary" max-width="900">
-          <v-textarea v-model="newPost" filled label="Your Text here" auto-grow>
+        <v-card v-show="this.thread.expand" class="mx-auto secondary" width="50%">
+          <v-textarea v-model="newPost" filled label="Your Text here" auto-grow max-width>
           </v-textarea>
           <v-card-actions>
             <v-btn rounded @click="savePost(); this.$router.go()">
@@ -121,3 +121,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.button {
+  color: #000000;
+  background-color: #ffa31a;
+}
+</style>

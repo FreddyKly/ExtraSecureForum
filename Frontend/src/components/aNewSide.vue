@@ -1,4 +1,54 @@
 <template>
+  <v-app>
+  <v-app-bar
+      color="deep-purple accent-4"
+      dense
+      dark
+    >
+      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
+
+      <v-app-bar-title style="cursor: pointer" @click="$router.push('/')">ExtraSecureForum</v-app-bar-title>
+
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+
+      <v-btn icon stacked>
+        Register
+        <v-icon>mdi-account-plus</v-icon>
+      </v-btn>
+
+      <v-btn icon stacked>
+        Login
+        <v-icon @click="$router.push('/LoginPage')" >mdi-login</v-icon>
+      </v-btn>
+
+      <v-menu
+        left
+        bottom
+      >
+        <!-- <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template> -->
+
+        <v-list>
+          <v-list-item
+            v-for="n in 5"
+            :key="n"
+            @click="() => {}"
+          >
+            <v-list-item-title>Option {{ n }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-app-bar>
+
+
   <v-card class="mx-auto" max-width="900" outlined>
     <v-list-item three-line>
       <v-list-item-content>
@@ -51,6 +101,7 @@
       </v-row>
     </v-container>
   </v-card>
+</v-app>
 </template>
 
 <script>

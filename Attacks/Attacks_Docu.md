@@ -7,3 +7,11 @@ anstatt nur einen mit einer spezifischen ID.
 - Reflected XSS
 Insert <script>alert();</script>
 https://www.imperva.com/learn/application-security/reflected-xss-attacks/#:~:text=Reflected%20XSS%20attacks%2C%20also%20known,enables%20execution%20of%20malicious%20scripts.
+https://www.youtube.com/watch?v=T0vxdqvW9fU&list=LL&index=3
+
+# Brute-force attack
+
+# Broken Encryption
+Möglich wegen veraltetem Hashalgorythmus (SHA256) und weil kein Salt verwendet wird sind alle hashes deterministisch 
+
+# HTML Injections

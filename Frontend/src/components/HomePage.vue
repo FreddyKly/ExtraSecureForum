@@ -42,7 +42,7 @@
                   absolute
                   bottom
                   right
-                ><v-icon>mdi-plus</v-icon></v-btn>
+                ><v-icon color="black">mdi-plus</v-icon></v-btn>
       </div>
     </v-app>
 </template>

@@ -12,7 +12,7 @@
                     <v-text-field v-model="confirmPassword" prepend-icon="mdi-lock" name="confirmPassword" label="Confirm Password"
                         type="password" placeholder="cocnfirm password" required></v-text-field>
                 </v-col>
-                <v-btn rounded @click="Login();" color="#ffa31a">
+                <v-btn rounded @click="Login();" class="button">
                     Register
                 </v-btn>
             </v-row>
@@ -45,3 +45,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.button {
+  color: #ffa31a;
+}
+</style>

@@ -23,7 +23,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-btn rounded @click="Login();" color="#ffa31a">
+        <v-btn class="button" rounded @click="Login();">
           Login
         </v-btn>
       </v-row>
@@ -55,3 +55,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.button {
+  color: #ffa31a;
+}
+</style>

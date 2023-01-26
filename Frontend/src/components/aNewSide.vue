@@ -12,15 +12,6 @@
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
 
-      <v-btn icon stacked>
-        Register
-        <v-icon>mdi-account-plus</v-icon>
-      </v-btn>
-
-      <v-btn icon stacked>
-        Login
-        <v-icon @click="$router.push('/LoginPage')" >mdi-login</v-icon>
-      </v-btn>
 
       <v-menu
         left
@@ -48,12 +39,12 @@
       </v-menu>
     </v-app-bar>
 
-  <v-card class="mt-5 mx-auto" max-width="900">
-    <v-card>
+  <v-card class="mt-5 mx-auto" max-width="900" color="#fcfaff"> 
+    <v-card color="#f0e6ff">
     <v-list-item three-line>
       
       <v-list-item-content>
-        <div v-text="this.thread.title" class="text-overline mb-4">
+        <div v-text="this.thread.title" class="text-h4 mb-4">
 
         </div>
         <v-list-item-title class="text-h5 mb-1">

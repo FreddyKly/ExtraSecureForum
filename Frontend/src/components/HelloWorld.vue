@@ -7,7 +7,7 @@
     >
       <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
-      <v-app-bar-title>ExtraSecureForum</v-app-bar-title>
+      <v-app-bar-title style="cursor: pointer" @click="$router.go()">ExtraSecureForum</v-app-bar-title>
 
       <v-spacer></v-spacer>
 

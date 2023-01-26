@@ -1,6 +1,6 @@
 <template>
   <v-app>
-  <v-form>
+    <h1>Login</h1>
     <v-container fluid>
       <v-row>
         <v-col>
@@ -19,18 +19,16 @@
             name="password"
             label="Password"
             :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="() => (password = !password)"
             :type="password ? 'password' : 'text'"
             required
           ></v-text-field>
         </v-col>
-        <v-btn rounded @click="Login();">
+        <v-btn rounded @click="Login();" color="deep-purple accent-4">
           Login
         </v-btn>
-
       </v-row>
+      <v-alert width="30%" class="align-center mb-6" type="error" v-if="this.loginWasClicked">Login Unsuccessful!!</v-alert>
     </v-container>
-  </v-form>
 </v-app>
 </template>
 <script>
@@ -40,15 +38,18 @@ export default {
     return {
       accountname: "",
       password: "",
+      loginWasClicked: false
     }
   },
 
   methods: {
     async Login() {
+      this.loginWasClicked = true
       try{
-      await userService.loginUser({ "username": this.accountname, "password": this.password })
-    }catch(e){
-     console.log(e); 
+        await userService.loginUser({ "username": this.accountname, "password": this.password })
+        this.$router.replace({name: 'home'})
+      }catch(e){
+        console.log(e);
     }
   }
   }

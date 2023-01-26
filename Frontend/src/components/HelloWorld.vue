@@ -5,9 +5,9 @@
       dense
       dark
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
 
-      <v-app-bar-title>Extra-Secure-Forum</v-app-bar-title>
+      <v-app-bar-title>ExtraSecureForum</v-app-bar-title>
 
       <v-spacer></v-spacer>
 
@@ -49,9 +49,9 @@
 
 
       <v-container v-for="(post, n) in listOfPosts" :key="n" class="grey lighten-5 mb-6">
-        <v-row :align="align" no-gutters style="height: 200px;" >
+        <v-row :align="align" no-gutters style="height: 100%;">
           <v-col v-for="y in 1" :key="y">
-            <v-card class="mx-auto" max-width="900" outlined >
+            <v-card class="mx-auto" max-width="900" outlined @click="$router.push('/aNewSide/'+ post.id.toString())">
               <v-list-item three-line>
                 <v-list-item-content>
                   <v-list-item-title v-text="post.title" class="text-h5 mb-1">
@@ -62,7 +62,7 @@
                 <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
               </v-list-item>
 
-              <v-card-actions>
+              <!-- <v-card-actions>
                 <v-btn outlined rounded text @click="$router.push('/aNewSide/'+ post.id.toString())">
                   View
                 </v-btn>
@@ -81,7 +81,7 @@
 
                 <div class="mx-4 hidden-sm-and-down"></div>
 
-              </v-card-actions>
+              </v-card-actions> -->
             </v-card>
           </v-col>
         </v-row>

@@ -20,8 +20,10 @@ router.get('/', async (req, res) => {
 
             const threads = await con.query(selectAllThreadsQuery);
 
-            res.status(200).send(await threads);
+            return res.status(200).send(await threads);
         }
+
+        res.status(403).send("User is not authenticated")
     } catch (error) {
         res.status(400).send(error.message);
     }finally{

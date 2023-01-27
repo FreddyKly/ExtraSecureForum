@@ -95,22 +95,22 @@ router.post('/login', async (req, res) =>{
         const user = await con.query(fetchQuery);
         console.log("first breakpoint "+ user[0] + req.body.username);
         if (user[0] == null) {
-            console.log("second breakpoint");
+            console.log("User was null");
             return res.status(400).send('Username could not be found!')
         }
 
         if (createHash('sha256').update(req.body.password).digest('hex') != user[0].passw) {
             console.log(createHash('sha256').update(req.body.password).digest('hex'), user[0].passw)
-            console.log("third breakpoint", user)
+            console.log("password did not match one in the database", user)
             return res.status(400).send('Wrong password!')
         }
 
         req.session.loggedin = true
         req.session.username = req.body.username
 
-        res.status(200).send("Login Successful")
+        res.status(200).json(req.session)
     } catch (error) {
-        console.log("fourth breakpoint");
+        console.log("Error");
         res.status(400).send(error.message);
     }finally{
         if (con) return con.end();

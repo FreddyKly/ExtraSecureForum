@@ -93,8 +93,8 @@ router.post('/login', async (req, res) =>{
         con = await pool.getConnection();
 
         const user = await con.query(fetchQuery);
-        console.log("first breakpoint "+ user[0]);
-        if (user == null) {
+        console.log("first breakpoint "+ user[0] + req.body.username);
+        if (user[0] == null) {
             console.log("second breakpoint");
             return res.status(400).send('Username could not be found!')
         }

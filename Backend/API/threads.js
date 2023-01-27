@@ -11,14 +11,17 @@ router.get('/', async (req, res) => {
     try {
         console.log('Registered a Get-Request for all Threads!')
 
-        const selectAllThreadsQuery = 'SELECT * FROM Threads';
+        if(req.session.loggedin) {
+            console.log("User is not authenticated")
+            
+            const selectAllThreadsQuery = 'SELECT * FROM Threads';
 
-        con = await pool.getConnection();
+            con = await pool.getConnection();
 
-        const threads = await con.query(selectAllThreadsQuery);
+            const threads = await con.query(selectAllThreadsQuery);
 
-        res.send(await threads);
-
+            res.status(200).send(await threads);
+        }
     } catch (error) {
         res.status(400).send(error.message);
     }finally{

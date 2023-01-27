@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser")
 const cors = require("cors");
 const session = require('express-session');
 
@@ -15,8 +16,11 @@ app.use(cors(corsOptions));
 app.use(session({
 	secret: 'secret',
 	resave: true,
-	saveUninitialized: true
+	saveUninitialized: false
 }));
+
+// cookie parser middleware
+app.use(cookieParser());
 
 // parse requests of content-type - application/json
 app.use(express.json({limit: "10mb", extended: true}))

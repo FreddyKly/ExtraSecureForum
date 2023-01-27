@@ -12,12 +12,14 @@
                     <v-text-field v-model="confirmPassword" prepend-icon="mdi-lock" name="confirmPassword" label="Confirm Password"
                         type="password" placeholder="cocnfirm password" required></v-text-field>
                 </v-col>
-                <v-btn rounded @click="Login();" class="button">
+                <v-btn rounded @click="Register();" class="button">
                     Register
                 </v-btn>
             </v-row>
-            <v-alert width="30%" class="align-center mb-6" type="error" v-if="this.loginWasClicked">Login
+            <div class="d-inline-flex justify-center" width="30%"><v-alert type="error" v-if="this.loginWasClicked">Login
                 Unsuccessful!!</v-alert>
+            <v-alert v-if="!this.passwordsEqual && this.registerWasClicked" type="error">Passwords don't match</v-alert></div>
+            
         </v-container>
     </v-app>
 </template>
@@ -28,19 +30,27 @@ export default {
         return {
             accountname: "",
             password: "",
-            loginWasClicked: false
+            confirmPassword: "",
+            registerWasClicked: false,
+            passwordsEqual: false          
         }
     },
 
     methods: {
-        async Login() {
-            this.loginWasClicked = true
-            try {
-                await userService.loginUser({ "username": this.accountname, "password": this.password })
-                this.$router.replace({ name: 'home' })
-            } catch (e) {
-                console.log(e);
+        async Register() {
+            this.registerWasClicked = true
+            if (this.password == this.confirmPassword && this.password != "") {
+                this.passwordsEqual = true
+               try {
+                    await userService.registerUser({ "username": this.accountname, "password": this.password })
+                    this.$router.replace({ name: 'home' })
+                } catch (e) {
+                    console.log(e);
+                } 
+            } else {
+                this.passwordsEqual = false
             }
+            
         }
     }
 }

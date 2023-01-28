@@ -5,14 +5,19 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon stacked class="text-black">
+      <v-btn v-if="!this.isLoggedIn" icon stacked class="text-black">
         Register
         <v-icon @click="$router.push('/RegisterPage')">mdi-account-plus</v-icon>
       </v-btn>
 
-      <v-btn icon stacked class="text-black">
+      <v-btn v-if="!this.isLoggedIn"  icon stacked class="text-black">
         Login
         <v-icon @click="$router.push('/LoginPage')" >mdi-login</v-icon>
+      </v-btn>
+
+      <v-btn v-if="this.isLoggedIn"  icon stacked class="text-black">
+        Logout
+        <v-icon @click="this.$axios.get('http://localhost:8080/api/users/logout'); $router.go()" >mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -49,6 +54,7 @@
 
 <script>
 import threadService from "@/services/threadService.js"
+import userService from "@/services/userService";
 export default {
 
   async created(){
@@ -63,6 +69,7 @@ export default {
     }catch(error){
       console.log(error);
     }
+    await this.checkLoginStatus()
 
   },
 
@@ -70,8 +77,15 @@ export default {
   data: () => ({
     test:"",
     expand: false,
-    listOfPosts: []
+    listOfPosts: [],
+    isLoggedIn: false
   }),
+
+  methods: {
+    async checkLoginStatus () {
+      this.isLoggedIn = await userService.isLoggedIn(this.$axios)
+    }
+  }
 }
 
 </script>

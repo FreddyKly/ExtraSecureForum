@@ -8,6 +8,7 @@ const router = express.Router();
 // Get the list of all Threads
 // Returns: JSON like this [{"id":1,"title":"Test-Thread!","post":"test post","created_at":"2023-01-17T18:33:47.000Z","updated_at":"2023-01-17T18:33:47.000Z"},{...}]
 router.get('/', async (req, res) => {
+    con = null
     try {
         console.log('Registered a Get-Request for all Threads!')
 
@@ -45,10 +46,6 @@ router.get('/:id', async (req, res) => {
         const thread = await con.query(selectThreadQuery);
 
         console.log("before destroy", JSON.stringify(req.session))
-
-        req.session.destroy()
-
-        console.log("SesssionID: ", JSON.stringify(req.session))
 
         res.send(await thread);
 

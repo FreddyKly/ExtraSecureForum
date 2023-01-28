@@ -32,10 +32,32 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/isloggedin', async (req, res) => {
+    try{
+        console.log("Registered a login-check")
+        if (req.session.loggedin) {
+            return res.status(200).send(true)
+        }
+        res.status(202).send(false)
+    }catch(e) {
+        res.status(400).send(e.message)
+    }
+})
+
+router.get('/logout', async (req, res) => {
+    try {
+        req.session.destroy()
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+})
+
+
 // Get information about a single user (with password). Again, let me know if we need an Endpoint like this.
 // Reach this Endpoint for example like this: http://localhost:8080/api/users/2
 // Returns: JSON of a single user. [{"id": 2, "username": "Admin", "passw": "12345", "created_at": "2023-01-17T18:33:47.000Z"}]
 router.get('/:id', async (req, res) => {
+    con = null
     try {
         console.log('Registered a Get-Request for a single user!')
 
@@ -55,13 +77,6 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.get('/logout', async (req, res) => {
-    try {
-        req.session.destroy()
-    } catch (error) {
-        res.status(400).send(error.message);
-    }
-})
 
 // Post
 // Create a User with a password and save to the database

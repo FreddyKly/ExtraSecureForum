@@ -43,6 +43,20 @@ class userService {
         })
     }
 
+    static isLoggedIn(axios) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.get(url + '/isloggedin');
+                const data = res.data;
+                console.log("User is logged in?: ", data)
+                resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
+
 }
 
 export default userService;

@@ -27,7 +27,8 @@
           Login
         </v-btn>
       </v-row>
-      <v-alert width="30%" class="align-center mb-6" type="error" v-if="this.loginWasClicked">Login Unsuccessful!!</v-alert>
+      <div class="align-center mb-6"><v-alert width="30%" type="error" v-if="this.loginWasClicked">Login Unsuccessful!!</v-alert></div>
+      
     </v-container>
 </v-app>
 </template>

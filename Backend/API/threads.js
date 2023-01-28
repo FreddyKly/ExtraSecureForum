@@ -12,8 +12,8 @@ router.get('/', async (req, res) => {
         console.log('Registered a Get-Request for all Threads!')
 
         if(req.session.loggedin) {
-            console.log("User is not authenticated")
-            
+            console.log("User has session", JSON.stringify(req.session))
+
             const selectAllThreadsQuery = 'SELECT * FROM Threads';
 
             con = await pool.getConnection();
@@ -44,7 +44,11 @@ router.get('/:id', async (req, res) => {
 
         const thread = await con.query(selectThreadQuery);
 
+        console.log("before destroy", JSON.stringify(req.session))
+
         req.session.destroy()
+
+        console.log("SesssionID: ", JSON.stringify(req.session))
 
         res.send(await thread);
 

@@ -73,12 +73,12 @@
 <script>
 import postService from "@/services/postService";
 import threadService from "@/services/threadService.js"
+
 export default {
   async created() {
     this.threadId = window.location.pathname.split('/')[2];
     try {
-
-      this.listOfPosts = await threadService.getThread(this.threadId);
+      this.listOfPosts = await threadService.getThread(this.threadId, this.$axios);
       this.listOfPosts.concat(this.expand);
 
       this.thread = this.listOfPosts[0],

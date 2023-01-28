@@ -17,7 +17,7 @@ app.use(cors(corsOptions));
 
 app.use(session({
 	secret: 'secret',
-	resave: true,
+	resave: false,
 	saveUninitialized: false,
 	store: store
 }));

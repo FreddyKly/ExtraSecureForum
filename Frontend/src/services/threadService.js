@@ -1,9 +1,8 @@
-import axios from 'axios';
 const url = 'http://localhost:8080/api/threads/';
 
 class threadService {
     // Get detections
-    static getThreadList() {
+    static getThreadList(axios) {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
             try {
@@ -17,7 +16,7 @@ class threadService {
         })
     }
 
-    static getThread(id) {
+    static getThread(id, axios) {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
             try {

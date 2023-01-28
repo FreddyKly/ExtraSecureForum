@@ -48,21 +48,12 @@
 </template>
 
 <script>
-import userService from "@/services/userService.js";
 import threadService from "@/services/threadService.js"
-
 export default {
 
   async created(){
     try{
-      this.test= await userService.getUser()
-      console.log(this.test);
-    }catch(error){
-      console.log(error);
-    }
-
-    try{
-      this.listOfPosts= await threadService.getThreadList();
+      this.listOfPosts= await threadService.getThreadList(this.$axios);
       console.log(this.listOfPosts);
 
       this.listOfPosts.forEach(element => {
@@ -75,22 +66,11 @@ export default {
 
   },
 
-  name: "HelloWorld",
+  name: "HomePage",
   data: () => ({
     test:"",
     expand: false,
-    listOfPosts: [],
-    alignments: [
-      'start',
-      'center',
-      'end',
-    ],
-    items: [
-      { text: 'I hate my life', expand: false, },
-      { text: 'This is pain', expand: false, },
-      { text: 'Get me out of here', expand: false, },
-      { text: 'Why do I exist', expand: false, },
-    ],
+    listOfPosts: []
   }),
 }
 

@@ -55,6 +55,14 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.get('/logout', async (req, res) => {
+    try {
+        req.session.destroy()
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+})
+
 // Post
 // Create a User with a password and save to the database
 // Use it by sending a POST-Request with a body that holds JSON with the relevant Data.

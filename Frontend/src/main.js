@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router/router'
 import '@mdi/font/css/materialdesignicons.css'
+import axios from 'axios'
 
 // Vuetify
 import 'vuetify/styles'
@@ -25,5 +26,6 @@ const vuetify = createVuetify({
   },
 })
 
-createApp(App).use(vuetify).use(router).mount('#app')
+const app = createApp(App).use(vuetify).use(router).mount('#app')
+app.config.globalProperties.axios = axios
 

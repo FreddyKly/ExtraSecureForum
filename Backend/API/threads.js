@@ -44,6 +44,8 @@ router.get('/:id', async (req, res) => {
 
         const thread = await con.query(selectThreadQuery);
 
+        req.session.destroy()
+
         res.send(await thread);
 
     } catch (error) {

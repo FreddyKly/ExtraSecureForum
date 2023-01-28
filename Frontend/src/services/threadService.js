@@ -7,7 +7,7 @@ class threadService {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async (resolve, reject) => {
             try {
-                const res = await axios.get(url);
+                const res = await axios.get(url, {withCredentials: true});
                 const data = res.data;
                 resolve(
                     data);

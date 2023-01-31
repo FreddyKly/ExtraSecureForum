@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../Database/connector');
+const {createHash} = require('crypto')
 
 const router = express.Router();
 
@@ -10,14 +11,13 @@ router.get('/test', async (req, res) => {
 })
 
 // Get
-// Get the list of all Users with passwords (not sure if we ever need this endpoint but we got it for now).
-// If we need it I'm throwing out the passwords ^^
-// Returns: JSON, something like this: [{"id": 1, "username": "Admin", "passw": "12345", "created_at": "2023-01-17T18:33:47.000Z"}, {...}]
+// Get the list of all Users.
+// Returns: JSON, something like this: [{"id": 1, "username": "Admin", "created_at": "2023-01-17T18:33:47.000Z"}, {...}]
 router.get('/', async (req, res) => {
     try {
         console.log('Registered a Get-Request for all users!')
 
-        const selectAllQuery = 'SELECT * FROM Users';
+        const selectAllQuery = 'SELECT username, created_at FROM Users';
 
         con = await pool.getConnection();
 
@@ -32,10 +32,32 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/isloggedin', async (req, res) => {
+    try{
+        console.log("Registered a login-check")
+        if (req.session.loggedin) {
+            return res.status(200).send(true)
+        }
+        res.status(202).send(false)
+    }catch(e) {
+        res.status(400).send(e.message)
+    }
+})
+
+router.get('/logout', async (req, res) => {
+    try {
+        req.session.destroy()
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+})
+
+
 // Get information about a single user (with password). Again, let me know if we need an Endpoint like this.
 // Reach this Endpoint for example like this: http://localhost:8080/api/users/2
 // Returns: JSON of a single user. [{"id": 2, "username": "Admin", "passw": "12345", "created_at": "2023-01-17T18:33:47.000Z"}]
 router.get('/:id', async (req, res) => {
+    con = null
     try {
         console.log('Registered a Get-Request for a single user!')
 
@@ -55,6 +77,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+
 // Post
 // Create a User with a password and save to the database
 // Use it by sending a POST-Request with a body that holds JSON with the relevant Data.
@@ -62,16 +85,55 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a single user!')
-        console.log(req.body)
+        
+        hashedPassword = createHash('sha256').update(req.body.password).digest('hex');
 
         const insertQuery = 'INSERT INTO Users VALUES (NULL, ?, ?, DEFAULT)';
 
         con = await pool.getConnection();
 
-        const result = await con.query(insertQuery, [req.body.username, req.body.password]);
+        const result = await con.query(insertQuery, [req.body.username, hashedPassword]);
 
         res.status(201).send('Entry was successfully inserted')
     } catch (error) {
+        res.status(400).send(error.message);
+    }finally{
+        if (con) return con.end();
+    }
+    
+});
+
+// Login a User with a password
+// Use it by sending a POST-Request with a body that holds JSON with the relevant Data.
+// The Body may look like this: {"username": "username_test", "password": "password_test"}
+// The user will get a Session-ID in his cookies to stay logged in
+router.post('/login', async (req, res) =>{
+    try {
+        console.log('Registered a Post-Request for a login!')
+
+        const fetchQuery = 'SELECT * FROM Users WHERE username="' + req.body.username + '"'
+
+        con = await pool.getConnection();
+
+        const user = await con.query(fetchQuery);
+        console.log("first breakpoint "+ user[0] + req.body.username);
+        if (user[0] == null) {
+            console.log("User was null");
+            return res.status(400).send('Username could not be found!')
+        }
+
+        if (createHash('sha256').update(req.body.password).digest('hex') != user[0].passw) {
+            console.log(createHash('sha256').update(req.body.password).digest('hex'), user[0].passw)
+            console.log("password did not match one in the database", user)
+            return res.status(400).send('Wrong password!')
+        }
+
+        req.session.loggedin = true
+        req.session.username = req.body.username
+
+        res.status(200).json(req.session)
+    } catch (error) {
+        console.log("Error");
         res.status(400).send(error.message);
     }finally{
         if (con) return con.end();

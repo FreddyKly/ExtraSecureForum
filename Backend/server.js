@@ -1,15 +1,27 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const session = require('express-session');
+const store = new session.MemoryStore();
 
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8081",
+  credentials: true,
+  exposedHeaders: ['set-cookie']
 };
 
 // Middleware - Has to be placed infront of the routes
 app.use(cors(corsOptions));
+
+app.use(session({
+	secret: 'secret',
+	resave: false,
+	saveUninitialized: false,
+	store: store
+}));
+
 // parse requests of content-type - application/json
 app.use(express.json({limit: "10mb", extended: true}))
 

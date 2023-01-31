@@ -3,7 +3,7 @@ USE SecureDatabase;
 CREATE TABLE IF NOT EXISTS `Users` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `username` VARCHAR(20) NOT NULL,
-    `passw` VARCHAR(30) NOT NULL,
+    `passw` varchar(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     PRIMARY KEY (`id`)
 );
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `Answers` (
 INSERT INTO SecureDatabase.Users (username, passw, created_at)
 VALUES (
     "admin",
-    "admin12345",
+    "41e5653fc7aeb894026d6bb7b2db7f65902b454945fa8fd65a6327047b5277fb",
     DEFAULT
 );
 INSERT INTO SecureDatabase.Threads (title, post, created_at, updated_at)

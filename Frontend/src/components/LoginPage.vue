@@ -11,6 +11,7 @@
             label="Login"
             type="text"
             required
+            v-on:keyup.enter="Login()"
           ></v-text-field>
           <v-text-field
             v-model="password"
@@ -21,6 +22,7 @@
             :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
             :type="password ? 'password' : 'text'"
             required
+            v-on:keyup.enter="Login()"
           ></v-text-field>
         </v-col>
         <v-btn class="button" rounded @click="Login();">
@@ -45,11 +47,11 @@ export default {
 
   methods: {
     async Login() {
-      this.loginWasClicked = true
       try{
         await userService.loginUser({ "username": this.accountname, "password": this.password })
         this.$router.replace({name: 'home'})
       }catch(e){
+        this.loginWasClicked = true
         console.log(e);
     }
   }

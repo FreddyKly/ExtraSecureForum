@@ -7,6 +7,11 @@
       <v-spacer></v-spacer>
       <v-spacer></v-spacer>
 
+      <v-btn v-if="this.isLoggedIn" icon stacked class="text-black">
+        Logout
+        <v-icon @click="this.$axios.get('http://localhost:8080/api/users/logout'); $router.replace({ name: 'home' })">mdi-logout</v-icon>
+      </v-btn>
+
     </v-app-bar>
 
     <div class="d-flex justify-center">
@@ -73,6 +78,7 @@
 <script>
 import postService from "@/services/postService";
 import threadService from "@/services/threadService.js"
+import userService from "@/services/userService";
 
 export default {
   async created() {
@@ -96,6 +102,7 @@ export default {
     } catch (error) {
       console.log(error);
     }
+    await this.checkLoginStatus()
   },
 
 
@@ -106,6 +113,7 @@ export default {
     expand: false,
     listOfPosts: [],
     thread: [],
+    isLoggedIn: false
   }),
 
   mounted() {
@@ -117,6 +125,9 @@ export default {
       postService.postAwnser({ "thread_id": this.threadId, "post": this.newPost })
 
 
+    },
+    async checkLoginStatus() {
+      this.isLoggedIn = await userService.isLoggedIn(this.$axios)
     }
   }
 }

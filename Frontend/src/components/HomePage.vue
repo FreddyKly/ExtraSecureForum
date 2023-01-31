@@ -1,7 +1,8 @@
 <template>
-    <v-app>
-      <v-app-bar color="#ffa31a" dense dark>
-      <v-app-bar-title class="font-weight-bold text-black" style="cursor: pointer" @click="$router.go()">ExtraSecureForum</v-app-bar-title>
+  <v-app>
+    <v-app-bar color="#ffa31a" dense dark>
+      <v-app-bar-title class="font-weight-bold text-black" style="cursor: pointer"
+        @click="$router.go()">ExtraSecureForum</v-app-bar-title>
 
       <v-spacer></v-spacer>
 
@@ -10,46 +11,45 @@
         <v-icon @click="$router.push('/RegisterPage')">mdi-account-plus</v-icon>
       </v-btn>
 
-      <v-btn v-if="!this.isLoggedIn"  icon stacked class="text-black">
+      <v-btn v-if="!this.isLoggedIn" icon stacked class="text-black">
         Login
-        <v-icon @click="$router.push('/LoginPage')" >mdi-login</v-icon>
+        <v-icon @click="$router.push('/LoginPage')">mdi-login</v-icon>
       </v-btn>
 
-      <v-btn v-if="this.isLoggedIn"  icon stacked class="text-black">
+      <v-btn v-if="this.isLoggedIn" icon stacked class="text-black">
         Logout
-        <v-icon @click="this.$axios.get('http://localhost:8080/api/users/logout'); $router.go()" >mdi-logout</v-icon>
+        <v-icon @click="this.$axios.get('http://localhost:8080/api/users/logout'); $router.go()">mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
 
-      <v-container v-for="(post, n) in listOfPosts" :key="n" class="grey lighten-5 mb-2">
-        <v-row :align="align" no-gutters style="height: 100%;">
-          <v-col v-for="y in 1" :key="y">
-            <v-card class="mx-auto" max-width="900" outlined @click="$router.push('/Thread/'+ post.id.toString())">
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <v-list-item-title v-text="post.title" class="text-h5 ma-5">
-                  </v-list-item-title>
-                  <v-list-item-subtitle v-text="post.post"></v-list-item-subtitle>
-                </v-list-item-content>
+    <div class="d-flex justify-center" v-if="!this.isLoggedIn">
+      <v-card class="px-15 py-10 my-16">
+        Bitte Log dich ein um Threads ansehen zu können
+      </v-card>
+    </div>
 
-                <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
-              </v-list-item>
-            </v-card>
-          </v-col>
-        </v-row>   
-      </v-container>
-      <div>
-        <v-btn
-                  color="#ffa31a"
-                  fab
-                  dark
-                  small
-                  absolute
-                  bottom
-                  right
-                ><v-icon color="black">mdi-plus</v-icon></v-btn>
-      </div>
-    </v-app>
+
+    <v-container v-for="(post, n) in listOfPosts" :key="n" class="grey lighten-5 mb-2">
+      <v-row :align="align" no-gutters style="height: 100%;">
+        <v-col v-for="y in 1" :key="y">
+          <v-card class="mx-auto" max-width="900" outlined @click="$router.push('/Thread/' + post.id.toString())">
+            <v-list-item three-line>
+              <v-list-item-content>
+                <v-list-item-title v-text="post.title" class="text-h5 ma-5">
+                </v-list-item-title>
+                <v-list-item-subtitle v-text="post.post"></v-list-item-subtitle>
+              </v-list-item-content>
+
+              <v-list-item-avatar tile size="80" color="grey"></v-list-item-avatar>
+            </v-list-item>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+    <div>
+      <v-btn color="#ffa31a" fab dark small absolute bottom right><v-icon color="black">mdi-plus</v-icon></v-btn>
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -57,16 +57,16 @@ import threadService from "@/services/threadService.js"
 import userService from "@/services/userService";
 export default {
 
-  async created(){
-    try{
-      this.listOfPosts= await threadService.getThreadList(this.$axios);
+  async created() {
+    try {
+      this.listOfPosts = await threadService.getThreadList(this.$axios);
       console.log(this.listOfPosts);
 
       this.listOfPosts.forEach(element => {
         console.log(element.id);
-       element.concat(this.expand);
+        element.concat(this.expand);
       });
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
     await this.checkLoginStatus()
@@ -75,14 +75,14 @@ export default {
 
   name: "HomePage",
   data: () => ({
-    test:"",
+    test: "",
     expand: false,
     listOfPosts: [],
     isLoggedIn: false
   }),
 
   methods: {
-    async checkLoginStatus () {
+    async checkLoginStatus() {
       this.isLoggedIn = await userService.isLoggedIn(this.$axios)
     }
   }
@@ -105,5 +105,4 @@ li {
   display: inline-block;
   margin: 0 10px;
 }
-
 </style>

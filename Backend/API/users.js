@@ -111,7 +111,12 @@ router.post('/login', async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a login!')
 
-        const fetchQuery = 'SELECT * FROM Users WHERE username="' + req.body.username + '"'
+        const fetchQuery = 
+        'SELECT * FROM Users WHERE username="' 
+        + req.body.username 
+        + '" AND passw="' 
+        + createHash('sha256').update(req.body.password).digest('hex')
+        + '"'
 
         con = await pool.getConnection();
 
@@ -122,14 +127,14 @@ router.post('/login', async (req, res) =>{
             return res.status(400).send('Username could not be found!')
         }
 
-        if (createHash('sha256').update(req.body.password).digest('hex') != user[0].passw) {
-            console.log(createHash('sha256').update(req.body.password).digest('hex'), user[0].passw)
-            console.log("password did not match one in the database", user)
-            return res.status(400).send('Wrong password!')
-        }
+        // if (createHash('sha256').update(req.body.password).digest('hex') != user[0].passw) {
+        //     console.log(createHash('sha256').update(req.body.password).digest('hex'), user[0].passw)
+        //     console.log("password did not match one in the database", user)
+        //     return res.status(400).send('Wrong password!')
+        // }
 
         req.session.loggedin = true
-        req.session.username = req.body.username
+        req.session.username = user[0].username
 
         res.status(200).json(req.session)
     } catch (error) {

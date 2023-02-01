@@ -80,5 +80,25 @@ router.post('/', async (req, res) =>{
     
 });
 
+router.post('/search', async (req, res) => {
+    try {
+        console.log('Registered a Post-Request for a search!')
+
+        const insertThreadQuery = 
+        "SELECT * FROM threads WHERE title LIKE '%" + req.body.searchText + "%' OR post LIKE '%" + req.body.searchText + "%'";
+
+        con = await pool.getConnection();
+
+        const result = await con.query(insertThreadQuery);
+        console.log(result)
+
+        res.status(200).json(JSON.stringify(result))
+    } catch (error) {
+        console.log(error)
+    }finally {
+        if (con) return con.end();
+    }
+})
+
 
 module.exports = router;

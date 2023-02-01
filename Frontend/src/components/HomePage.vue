@@ -1,10 +1,17 @@
 <template>
   <v-app>
     <v-app-bar color="#ffa31a" dense dark>
-      <v-app-bar-title class="font-weight-bold text-black" style="cursor: pointer"
-        @click="$router.go()">ExtraSecureForum</v-app-bar-title>
+      <div class="d-flex justify-left "><v-app-bar-title class="font-weight-bold text-black ml-10"
+          style="cursor: pointer" @click="$router.go()">ExtraSecureForum</v-app-bar-title></div>
+
 
       <v-spacer></v-spacer>
+
+      <v-text-field @focus="searchClosed = false" @blur="searchClosed = true"
+        :class="{ 'closed': searchClosed && !searchText }" placeholder="Suche" prepend-inner-icon="mdi-magnify" dense="true"
+        class="search-bar" max-width="200px" v-model="searchText" clearable v-on:keyup.enter="search()">
+      </v-text-field>
+
 
       <v-btn v-if="!this.isLoggedIn" icon stacked class="text-black">
         Register
@@ -78,12 +85,17 @@ export default {
     test: "",
     expand: false,
     listOfPosts: [],
-    isLoggedIn: false
+    isLoggedIn: false,
+    searchClosed: true,
+    searchText: ""
   }),
 
   methods: {
     async checkLoginStatus() {
       this.isLoggedIn = await userService.isLoggedIn(this.$axios)
+    },
+    async search() {
+      this.searchResult = await threadService.search(this.searchText, this.$axios)
     }
   }
 }
@@ -91,18 +103,16 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+<style lang="sass">
+  .v-input.search-bar
+    height: 45px
+    transition: max-width 0.3s
+    cursor: pointer !important
+    .v-input__control
+      &:before, &:after
+        border-color: transparent !important
+    &.closed
+      max-width: 45px
+      .v-input__slot
+        background: transparent !important
 </style>

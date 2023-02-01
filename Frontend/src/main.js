@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router/router'
+import '@mdi/font/css/materialdesignicons.css'
+// import axios from 'axios'
 
 // Vuetify
 import 'vuetify/styles'
@@ -10,6 +12,9 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
 const vuetify = createVuetify({
+  theme: {
+    defaultTheme: 'dark'
+  },
   components,
   directives,
   icons: {
@@ -21,5 +26,7 @@ const vuetify = createVuetify({
   },
 })
 
-createApp(App).use(vuetify).use(router).mount('#app')
+const app = createApp(App).use(vuetify).use(router)
+app.config.globalProperties.$axios = require('axios').create({withCredentials: true})
+app.mount('#app')
 

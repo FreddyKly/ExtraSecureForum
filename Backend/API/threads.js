@@ -8,17 +8,23 @@ const router = express.Router();
 // Get the list of all Threads
 // Returns: JSON like this [{"id":1,"title":"Test-Thread!","post":"test post","created_at":"2023-01-17T18:33:47.000Z","updated_at":"2023-01-17T18:33:47.000Z"},{...}]
 router.get('/', async (req, res) => {
+    con = null
     try {
         console.log('Registered a Get-Request for all Threads!')
 
-        const selectAllThreadsQuery = 'SELECT * FROM Threads';
+        if(req.session.loggedin) {
+            console.log("User has session", JSON.stringify(req.session))
 
-        con = await pool.getConnection();
+            const selectAllThreadsQuery = 'SELECT * FROM Threads';
 
-        const threads = await con.query(selectAllThreadsQuery);
+            con = await pool.getConnection();
 
-        res.send(await threads);
+            const threads = await con.query(selectAllThreadsQuery);
 
+            return res.status(200).send(await threads);
+        }
+
+        res.status(403).send("User is not authenticated")
     } catch (error) {
         res.status(400).send(error.message);
     }finally{
@@ -38,6 +44,8 @@ router.get('/:id', async (req, res) => {
         con = await pool.getConnection();
 
         const thread = await con.query(selectThreadQuery);
+
+        console.log("before destroy", JSON.stringify(req.session))
 
         res.send(await thread);
 
@@ -71,6 +79,27 @@ router.post('/', async (req, res) =>{
     }
     
 });
+
+router.post('/search', async (req, res) => {
+    try {
+        console.log('Registered a Post-Request for a search!')
+
+        const insertThreadQuery = 
+        "SELECT * FROM threads WHERE title LIKE '%" + req.body.searchText + "%' OR post LIKE '%" + req.body.searchText + "%'";
+
+        con = await pool.getConnection();
+
+        const result = await con.query(insertThreadQuery);
+        console.log(result)
+
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(400).send(error)
+        console.log(error)
+    }finally {
+        if (con) return con.end();
+    }
+})
 
 
 module.exports = router;

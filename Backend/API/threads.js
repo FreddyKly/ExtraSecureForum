@@ -92,7 +92,7 @@ router.post('/search', async (req, res) => {
         const result = await con.query(insertThreadQuery);
         console.log(result)
 
-        res.status(200).json(JSON.stringify(result))
+        res.status(200).json(result)
     } catch (error) {
         console.log(error)
     }finally {

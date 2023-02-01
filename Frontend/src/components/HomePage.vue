@@ -95,7 +95,7 @@ export default {
       this.isLoggedIn = await userService.isLoggedIn(this.$axios)
     },
     async search() {
-      this.searchResult = await threadService.search(this.searchText, this.$axios)
+      this.listOfPosts = await threadService.search(this.searchText, this.$axios)
     }
   }
 }

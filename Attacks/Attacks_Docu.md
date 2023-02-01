@@ -1,7 +1,8 @@
 # SQL Injections
-Kann momentan beispielsweise durchgeführt werden, indem eine Get-Request an 
-__http://localhost:8080/api/users/" OR "1" = "1__ geschickt wird. Hierdurch bekommt man alle User Zurück geliefert 
+Kann momentan beispielsweise durchgeführt werden, folgendes 
+__" OR 1 = 1 #__ in das login-Username feld eingetragen wird wird. Hierdurch bekommt man alle User Zurück geliefert 
 anstatt nur einen mit einer spezifischen ID.
+Union Attack
 
 # Cross-Site Scripting
 - Reflected XSS

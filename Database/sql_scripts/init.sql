@@ -27,13 +27,6 @@ CREATE TABLE IF NOT EXISTS `Answers` (
         ON DELETE CASCADE
 );
 
-
-INSERT INTO SecureDatabase.Users (username, passw, created_at)
-VALUES (
-    "admin",
-    "41e5653fc7aeb894026d6bb7b2db7f65902b454945fa8fd65a6327047b5277fb",
-    DEFAULT
-);
 INSERT INTO SecureDatabase.Threads (title, post, created_at, updated_at)
 VALUES (
     "Cross-Site Scripting",

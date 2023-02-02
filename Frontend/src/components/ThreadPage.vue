@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar color="#ffa31a" dense dark>
+    <v-app-bar color="#57b5b3" dense dark>
 
       <v-app-bar-title class="font-weight-bold text-black" style="cursor: pointer"
         @click="$router.push('/')">ExtraSecureForum</v-app-bar-title>
@@ -135,6 +135,6 @@ export default {
 <style scoped>
 .button {
   color: #000000;
-  background-color: #ffa31a;
+  background-color: #57b5b3;
 }
 </style>

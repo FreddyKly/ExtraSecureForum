@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <v-app-bar color="#ffa31a" dense dark>
-      <div class="d-flex justify-left "><v-app-bar-title class="font-weight-bold text-black ml-10"
+    <v-app-bar color="#57b5b3" dense>
+      <div class="d-flex justify-left "><v-app-bar-title class="font-weight-bold ml-10"
           style="cursor: pointer" @click="$router.go()">ExtraSecureForum</v-app-bar-title></div>
 
 
@@ -13,17 +13,17 @@
       </v-text-field>
 
 
-      <v-btn v-if="!this.isLoggedIn" icon stacked class="text-black">
+      <v-btn v-if="!this.isLoggedIn" icon stacked>
         Register
         <v-icon @click="$router.push('/RegisterPage')">mdi-account-plus</v-icon>
       </v-btn>
 
-      <v-btn v-if="!this.isLoggedIn" icon stacked class="text-black">
+      <v-btn v-if="!this.isLoggedIn" icon stacked>
         Login
         <v-icon @click="$router.push('/LoginPage')">mdi-login</v-icon>
       </v-btn>
 
-      <v-btn v-if="this.isLoggedIn" icon stacked class="text-black">
+      <v-btn v-if="this.isLoggedIn" icon stacked>
         Logout
         <v-icon @click="this.$axios.get('http://localhost:8080/api/users/logout'); $router.go()">mdi-logout</v-icon>
       </v-btn>
@@ -36,7 +36,7 @@
     </div>
 
 
-    <v-container v-for="(post, n) in listOfPosts" :key="n" class="grey lighten-5 mb-2">
+    <v-container v-for="(post, n) in listOfPosts" :key="n" class="lighten-5 mb-2">
       <v-row :align="align" no-gutters style="height: 100%;">
         <v-col v-for="y in 1" :key="y">
           <v-card class="mx-auto" max-width="900" outlined @click="$router.push('/Thread/' + post.id.toString())">
@@ -54,7 +54,7 @@
       </v-row>
     </v-container>
     <div>
-      <v-btn color="#ffa31a" fab dark small absolute bottom right><v-icon color="black">mdi-plus</v-icon></v-btn>
+      <v-btn color="#57b5b3" fab small absolute bottom right><v-icon>mdi-plus</v-icon></v-btn>
     </div>
   </v-app>
 </template>

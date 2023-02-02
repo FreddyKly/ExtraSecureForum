@@ -60,6 +60,6 @@ export default {
 </script>
 <style scoped>
 .button {
-  color: #ffa31a;
+  color: #57b5b3;
 }
 </style>

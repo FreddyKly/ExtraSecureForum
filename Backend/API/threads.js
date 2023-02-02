@@ -39,11 +39,11 @@ router.get('/:id', async (req, res) => {
     try {
         console.log('Registered a Get-Request for a single Thread!')
 
-        const selectThreadQuery = 'SELECT * FROM Threads WHERE id="' + req.params.id + '"';
+        const selectThreadQuery = 'SELECT * FROM Threads WHERE id= ?';
 
         con = await pool.getConnection();
 
-        const thread = await con.query(selectThreadQuery);
+        const thread = await con.query(selectThreadQuery, [req.params.id]);
 
         console.log("before destroy", JSON.stringify(req.session))
 
@@ -85,11 +85,12 @@ router.post('/search', async (req, res) => {
         console.log('Registered a Post-Request for a search!')
 
         const insertThreadQuery = 
-        "SELECT * FROM threads WHERE title LIKE '%" + req.body.searchText + "%' OR post LIKE '%" + req.body.searchText + "%'";
+        "SELECT * FROM threads WHERE title LIKE ? OR post LIKE ?";
 
         con = await pool.getConnection();
+        const querySearch = "%" + req.body.searchText + "%";
 
-        const result = await con.query(insertThreadQuery);
+        const result = await con.query(insertThreadQuery, [querySearch, querySearch]);
         console.log(result)
 
         res.status(200).json(result)

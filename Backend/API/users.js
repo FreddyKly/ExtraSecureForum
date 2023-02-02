@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../Database/connector');
 const {createHash} = require('crypto')
+const bcrypt = require('bcrypt')
 
 const router = express.Router();
 
@@ -61,12 +62,12 @@ router.get('/:id', async (req, res) => {
     try {
         console.log('Registered a Get-Request for a single user!')
 
-        const selectAllQuery = 'SELECT * FROM Users WHERE id="' + req.params.id + '"';
+        const selectAllQuery = 'SELECT * FROM Users WHERE id= ?';
         //const selectAllQuery = 'SELECT * FROM Users WHERE id=?';
 
         con = await pool.getConnection();
 
-        const user = await con.query(selectAllQuery);
+        const user = await con.query(selectAllQuery, [req.params.id]);
 
         res.send(await user);
 
@@ -83,10 +84,11 @@ router.get('/:id', async (req, res) => {
 // Use it by sending a POST-Request with a body that holds JSON with the relevant Data.
 // The Body may look like this: {"username": "username_test", "password": "password_test"}
 router.post('/', async (req, res) =>{
+    con = null
     try {
         console.log('Registered a Post-Request for a single user!')
         
-        const salt = bcrypt.genSalt()
+        const salt = await bcrypt.genSalt()
 
         const hashedPassword = await bcrypt.hash(req.body.password, salt)
 
@@ -114,26 +116,21 @@ router.post('/login', async (req, res) =>{
         console.log('Registered a Post-Request for a login!')
 
         const fetchQuery = 
-        'SELECT * FROM Users WHERE username="' 
-        + req.body.username 
-        + '" AND passw="' 
-        + createHash('sha256').update(req.body.password).digest('hex')
-        + '"'
+        'SELECT * FROM Users WHERE username= ?'
 
         con = await pool.getConnection();
 
-        const user = await con.query(fetchQuery);
+        const user = await con.query(fetchQuery, [req.body.username]);
         console.log("first breakpoint "+ user[0] + req.body.username);
         if (user[0] == null) {
             console.log("User was null");
             return res.status(400).send('Username could not be found!')
         }
 
-        // if (createHash('sha256').update(req.body.password).digest('hex') != user[0].passw) {
-        //     console.log(createHash('sha256').update(req.body.password).digest('hex'), user[0].passw)
-        //     console.log("password did not match one in the database", user)
-        //     return res.status(400).send('Wrong password!')
-        // }
+        if (await bcrypt.compare(req.body.password, user[0].passw)) {
+            console.log("password did not match one in the database", user)
+            return res.status(400).send('Wrong password!')
+        }
 
         req.session.loggedin = true
         req.session.username = user[0].username
@@ -152,11 +149,11 @@ router.post('/login', async (req, res) =>{
 // I don't think we'll use this, but it's here
 router.delete('/:id', async (req, res) =>{
     try {
-        const deleteQuery = 'DELETE FROM Users Where id="' + req.params.id + '"';
+        const deleteQuery = 'DELETE FROM Users Where id= ?';
 
         con = await pool.getConnection();
 
-        const result = await con.query(deleteQuery);
+        const result = await con.query(deleteQuery, [req.params.id]);
         
         res.status(200).send()
     } catch (error) {

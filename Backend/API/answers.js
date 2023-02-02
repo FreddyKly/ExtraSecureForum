@@ -12,11 +12,11 @@ router.get('/:id', async (req, res) => {
     try {
         console.log('Registered a Get-Request for all Answers to a Thread!')
 
-        const selectAllAnswersQuery = 'SELECT * FROM Answers WHERE thread_id="' + req.params.id + '"';
+        const selectAllAnswersQuery = 'SELECT * FROM Answers WHERE thread_id= ?';
 
         con = await pool.getConnection();
 
-        const answers = await con.query(selectAllAnswersQuery);
+        const answers = await con.query(selectAllAnswersQuery, [req.params.id]);
 
         res.send(await answers);
 

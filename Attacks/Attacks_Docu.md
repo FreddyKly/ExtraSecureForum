@@ -2,10 +2,15 @@
 Kann momentan beispielsweise durchgeführt werden, folgendes 
 __" OR 1 = 1 #__ in das login-Username feld eingetragen wird. Hierdurch kann man sich einloggen ohne credentials zu nutzen.
 
-## Union Attack 
+### Union Attack 
 Query kann herausgefunden werden, indem man __%'__ in das suchfeld postet oder __"__ in das login-feld.
 __%' ORDER BY 4--__ to find out how many columns are in the table since this is important for the attack.
 __%' UNION SELECT NULL, NULL, username, passw, NULL FROM Users --__ to return userdata.
+
+## Maßnahmen
+Escaping query values:
+https://github.com/mysqljs/mysql#escaping-query-values (Placeholders: https://mariadb.com/kb/en/connector-nodejs-promise-api/)
+
 
 # Cross-Site Scripting
 Reflected XSS

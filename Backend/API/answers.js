@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../Database/connector');
+const sanitizeHtml = require('sanitize-html');
 
 const router = express.Router();
 
@@ -39,7 +40,11 @@ router.post('/', async (req, res) =>{
 
         con = await pool.getConnection();
 
-        const result = await con.query(insertThreadQuery, [req.body.thread_id, req.body.post]);
+        const sanitizedPost = sanitizeHtml(req.body.post)
+
+        console.log(req.body.post, sanitizedPost)
+
+        const result = await con.query(insertThreadQuery, [req.body.thread_id, sanitizedPost]);
 
         res.status(201).send('Entry was successfully inserted')
 

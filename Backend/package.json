@@ -25,6 +25,7 @@
     "express-rate-limit": "^6.7.0",
     "express-session": "^1.17.3",
     "mariadb": "^3.0.2",
+    "sanitize-html": "^2.9.0",
     "sequelize": "^6.28.0"
   },
   "devDependencies": {

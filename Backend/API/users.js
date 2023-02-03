@@ -12,7 +12,7 @@ const limiter = rateLimiter({
 
 const router = express.Router();
 
-router.use(limiter)
+// router.use(limiter)
 
 // Test Endpoint for checking if Connection is working
 router.get('/test', async (req, res) => {
@@ -120,7 +120,7 @@ router.post('/', async (req, res) =>{
 // Use it by sending a POST-Request with a body that holds JSON with the relevant Data.
 // The Body may look like this: {"username": "username_test", "password": "password_test"}
 // The user will get a Session-ID in his cookies to stay logged in
-router.post('/login', async (req, res) =>{
+router.post('/login', limiter, async (req, res) =>{
     try {
         console.log('Registered a Post-Request for a login!')
 

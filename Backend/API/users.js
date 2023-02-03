@@ -2,8 +2,17 @@ const express = require('express');
 const pool = require('../Database/connector');
 const {createHash} = require('crypto')
 const bcrypt = require('bcrypt')
+const rateLimiter = require("express-rate-limit");
+
+const limiter = rateLimiter({
+    max: 3,
+    windowMS: 60 * 1000, // One minute
+    message: "You can't make any more requests at the moment. Try again later",
+});
 
 const router = express.Router();
+
+router.use(limiter)
 
 // Test Endpoint for checking if Connection is working
 router.get('/test', async (req, res) => {

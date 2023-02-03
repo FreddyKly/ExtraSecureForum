@@ -30,6 +30,13 @@ https://v2.vuejs.org/v2/guide/security.html#:~:text=The%20most%20fundamental%20s
 # Brute-force attack
 Is possible because we do not check how many requests have been sent by one user
 
+To start the brute-force script navigate to the "Attacks" directory and preform the following command:
+
+```
+python -m pip install selenium
+python brute-force.py -u admin -t http://localhost:8081/loginPage -p passwords.txt
+```
+
 # Broken Encryption
 Möglich wegen veraltetem Hashalgorythmus (SHA256) und weil kein Salt verwendet wird sind alle hashes deterministisch 
 

@@ -25,14 +25,23 @@
             v-on:keyup.enter="Login()"
           ></v-text-field>
         </v-col>
-        <v-btn class="button" rounded @click="Login();">
-          Login
-        </v-btn>
+        <v-btn class="button" rounded @click="Login()"> Login </v-btn>
       </v-row>
-      <div class="align-center mb-6"><v-alert width="30%" type="error" v-if="this.loginWasClicked">Login Unsuccessful!!</v-alert></div>
-      
+      <div class="align-center mb-6">
+        <v-alert
+          width="30%"
+          type="error"
+          v-if="this.loginWasClicked && !this.tooManyRequests"
+          >Login Unsuccessful!!</v-alert
+        >
+      </div>
+      <div class="align-center mb-6">
+        <v-alert width="30%" type="error" v-if="this.tooManyRequests"
+          >Too many Requests! Try later</v-alert
+        >
+      </div>
     </v-container>
-</v-app>
+  </v-app>
 </template>
 <script>
 import userService from "@/services/userService.js";
@@ -41,22 +50,31 @@ export default {
     return {
       accountname: "",
       password: "",
-      loginWasClicked: false
-    }
+      loginWasClicked: false,
+      tooManyRequests: false,
+    };
   },
 
   methods: {
     async Login() {
-      try{
-        await userService.loginUser({ "username": this.accountname, "password": this.password })
-        this.$router.replace({name: 'home'})
-      }catch(e){
-        this.loginWasClicked = true
+      var responseStatus = 0;
+      try {
+        responseStatus = await userService.loginUser({
+          username: this.accountname,
+          password: this.password,
+        });
+        this.$router.replace({ name: "home" });
+      } catch (e) {
+        responseStatus = e.response.status;
+        if (responseStatus == 429) {
+          this.tooManyRequests = true;
+        }
+        this.loginWasClicked = true;
         console.log(e);
-    }
-  }
-  }
-}
+      }
+    },
+  },
+};
 </script>
 <style scoped>
 .button {

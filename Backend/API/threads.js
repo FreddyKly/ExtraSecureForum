@@ -45,8 +45,6 @@ router.get('/:id', async (req, res) => {
 
         const thread = await con.query(selectThreadQuery, [req.params.id]);
 
-        console.log("before destroy", JSON.stringify(req.session))
-
         res.send(await thread);
 
     } catch (error) {

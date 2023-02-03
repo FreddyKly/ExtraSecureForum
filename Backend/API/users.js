@@ -126,16 +126,22 @@ router.post('/login', async (req, res) =>{
             console.log("User was null");
             return res.status(400).send('Username could not be found!')
         }
-
-        if (await bcrypt.compare(req.body.password, user[0].passw)) {
-            console.log("password did not match one in the database", user)
-            return res.status(400).send('Wrong password!')
-        }
-
-        req.session.loggedin = true
-        req.session.username = user[0].username
-
-        res.status(200).json(req.session)
+        console.log(req.body.password, user[0].passw, bcrypt.compare(req.body.password, user[0].passw))
+        bcrypt.compare(req.body.password, user[0].passw, function(err, result) {
+            if (err){
+                console.log(err)
+                return res.status(500).send(err)
+            }
+            if (result) {
+                req.session.loggedin = true
+                req.session.username = user[0].username
+        
+                res.status(200).json(req.session)
+            } else {
+              // response is OutgoingMessage object that server response http request
+              return res.status(400).json({success: false, message: 'passwords do not match'});
+            }
+          });
     } catch (error) {
         console.log("Error");
         res.status(400).send(error.message);

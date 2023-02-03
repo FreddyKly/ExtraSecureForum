@@ -89,6 +89,7 @@ router.post('/search', async (req, res) => {
 
         con = await pool.getConnection();
         const querySearch = "%" + req.body.searchText + "%";
+        console.log(querySearch)
 
         const result = await con.query(insertThreadQuery, [querySearch, querySearch]);
         console.log(result)

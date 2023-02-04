@@ -10,7 +10,7 @@
 `%' UNION SELECT NULL, NULL, username, passw, NULL FROM Users -- `, wobei die die Anzahl der "NULL" + die Anzahl der gewollten column-names der vorher herausgefundenen Anzahl der Columns entsprechen muss. Das Ergebnis hieraus ist, dass man die normalen Ergebnisse der Such-Query mit dem Select-Statement für den Users Table verbindet um nicht nur die Threads von der Datenbank zurück zu bekommen, sondern eben auch die Ergebnisse aus dem Users Table. In unserem Fall würden wir also auch Ergebnisse aus den "username" und "passw" columns des Users Table zusammen mit den Threads zurück geliefert bekommen.
 
 ## Maßnahmen
-Escaping query values:
+Escaping and query values:
 https://github.com/mysqljs/mysql#escaping-query-values (Placeholders: https://mariadb.com/kb/en/connector-nodejs-promise-api/)
 
 
@@ -46,8 +46,14 @@ python -m pip install selenium
 python brute-force.py -u admin -t http://localhost:8081/loginPage -p passwords.txt
 ```
 
+## Maßnahmen
+Using a rate limiter: https://www.npmjs.com/package/express-rate-limit
+
 # Broken Encryption
-Möglich wegen veraltetem Hashalgorythmus (SHA256) und weil kein Salt verwendet wird sind alle hashes deterministisch 
+Möglich wegen veraltetem Hashalgorythmus (SHA256) und weil kein Salt verwendet wird sind alle hashes deterministisch. Dadurch ist das verwenden eines Rainbowtables möglich.
+
+## Maßnahmen
+Using bcrypt for hashing passwords: https://en.wikipedia.org/wiki/Bcrypt
 
 # HTML Injections
 (Phishing)

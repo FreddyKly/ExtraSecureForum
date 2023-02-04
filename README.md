@@ -1,4 +1,7 @@
 # ExtraSecureForum
+- Die Unsichere Version welche keinen Schutz gegen Angriffe bietet findet sich auf dem "main-Branch" oder in dem Release mit dem Tag `v.1.1-Hackable`.
+- Die gesicherte Version der App, welche maßnahmen gegen bestimmte angriffe ergreift findet man auf dem "SecureVersion-Branch" oder in dem Release mit dem Tag `v.1.0-Secure`
+- Mehr Infos zu durchgeführten Angriffen oder ergriffenen Maßnahmen können in __./Attacks/Attacks_Docu.md__ gefunden werden
 # Setup with Docker (Prod. and Testing)
 ## Docker-compose
 This is the easiest way of getting everything up and running.

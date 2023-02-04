@@ -19,14 +19,14 @@ docker-compose up
 - This should build the docker images and then let them run. The Backend will be running on localhost:8080 and the Frontend on localhost:8081.
 After this command wait for everything to download and install (maybe 5min).
 
-- If the backend container stops running with an error like: "SqlError: (conn=-1, no: 45028, SQLState: HY000) retrieve connection from pool timeout after 10002ms" then the backend tried to connect to the database before the databse was up and running. If this happens simply open another terminal and run the command:
+- If the backend container stops running with an error like: "SqlError: (conn=-1, no: 45028, SQLState: HY000) retrieve connection from pool timeout after 10002ms" then the backend tried to connect to the database before it was up and running. If this happens, simply open another terminal and run the command:
 `docker-compose run backend`.
 
-- You're Done! Yay!
+- You're Done! You can now visit the App under `localhost:8081`!
 
 <hr>
 
-# Alternative
+# Alternative setup
 Open 3 terminals for the three different services.
 ## Frontend
 1. `cd Frontend`

@@ -23,7 +23,7 @@ After this command wait for everything to download and install (maybe 5min).
 
 <hr>
 
-# Alternative
+# Alternative setup
 Open 3 terminals for the three different services.
 ## Frontend
 1. `cd Frontend`

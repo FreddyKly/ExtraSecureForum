@@ -6,18 +6,21 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   {
+    name: 'home',
     path: '/',
-    component: () => import("../components/HelloWorld")
+    component: () => import("../components/HomePage")
   },
-
   {
     path: '/LoginPage/',
     component: () => import("../components/LoginPage")
   },
-
   {
-    path: '/aNewSide/:id',
-    component: () => import("../components/aNewSide")
+    path: '/RegisterPage/',
+    component: () => import("../components/RegisterPage")
+  },
+  {
+    path: '/Thread/:id',
+    component: () => import("../components/ThreadPage")
   },
   // catch all 404
   {

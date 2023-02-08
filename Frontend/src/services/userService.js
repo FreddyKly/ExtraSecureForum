@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = 'http://localhost:8080/api/users';
+const url = `${process.env.API_BASE_URL}/api/users/`;
 
 class userService {
     // Get detections
@@ -51,6 +51,18 @@ class userService {
                 const data = res.data;
                 console.log("User is logged in?: ", data)
                 resolve(data);
+            } catch (err) {
+                reject(err);
+            }
+        })
+    }
+
+    static logoutUser(axios) {
+        // eslint-disable-next-line no-async-promise-executor
+        return new Promise(async (resolve, reject) => {
+            try {
+                const res = await axios.get(url + 'logout');
+                resolve(res);
             } catch (err) {
                 reject(err);
             }

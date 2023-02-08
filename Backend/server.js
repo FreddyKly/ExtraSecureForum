@@ -7,7 +7,7 @@ const store = new session.MemoryStore();
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: "http://localhost:8083",
   credentials: true,
   exposedHeaders: ['set-cookie']
 };
@@ -37,7 +37,7 @@ app.use('/api/threads', threads);
 app.use('/api/answers', answers);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8082;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

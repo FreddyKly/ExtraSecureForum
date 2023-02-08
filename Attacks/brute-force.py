@@ -26,7 +26,7 @@ with open(file, "r") as s:
         passwords.append(i)
 
 
-def loginuserpass(passw):
+def loginWithPasswordList(passw):
     time.sleep(1)
     driver.implicitly_wait(5)
     driver.current_url
@@ -51,5 +51,7 @@ driver.get(url)
 
 
 for i in range(len(passwords)):
-    loginuserpass(passwords[i])
+    loginWithPasswordList(passwords[i])
     i += 1
+
+time.sleep(2)

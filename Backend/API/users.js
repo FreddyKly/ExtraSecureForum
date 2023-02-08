@@ -50,14 +50,18 @@ router.get('/isloggedin', async (req, res) => {
         }
         res.status(202).send(false)
     }catch(e) {
+        console.log(e.message)
         res.status(400).send(e.message)
     }
 })
 
 router.get('/logout', async (req, res) => {
     try {
+        console.log("Registered Logout from session: ", req.session)
         req.session.destroy()
+        res.status(200).send("Logout was successful")
     } catch (error) {
+        console.log(error.message)
         res.status(400).send(error.message);
     }
 })

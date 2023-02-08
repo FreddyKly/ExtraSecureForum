@@ -1,17 +1,17 @@
 version: '3.8'
 services:
-  frontend:
+  frontend-secure:
     build: ./Frontend
     # command: npm run serve -- --public 0.0.0.0:8080 #Use this for hot-reload capabilities
     ports:
-      - 8081:8081
+      - 8083:8083
 
-  backend:
+  backend-secure:
     build: ./Backend
     depends_on:
       - mariadb
     ports:
-      - 8080:8080
+      - 8082:8082
 
   mariadb:
     image: mariadb

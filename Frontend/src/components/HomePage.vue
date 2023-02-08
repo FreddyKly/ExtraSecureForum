@@ -25,7 +25,7 @@
 
       <v-btn v-if="this.isLoggedIn" icon stacked>
         Logout
-        <v-icon @click="this.$axios.get('http://localhost:8080/api/users/logout'); $router.go()">mdi-logout</v-icon>
+        <v-icon @click="logoutUser(); $router.go()">mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -96,7 +96,10 @@ export default {
     },
     async search() {
       this.listOfPosts = await threadService.search(this.searchText, this.$axios)
-    }
+    },
+     async logoutUser() {
+      await userService.logoutUser(this.$axios)
+     }
   }
 }
 

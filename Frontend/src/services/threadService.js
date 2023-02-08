@@ -1,4 +1,4 @@
-const url = 'http://localhost:8080/api/threads/';
+const url = `${process.env.API_BASE_URL}/api/threads/`;
 
 class threadService {
     // Get detections

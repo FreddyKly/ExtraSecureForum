@@ -11,6 +11,8 @@ __%' UNION SELECT NULL, username, passw, NULL, NULL FROM Users --__ to return us
 Escaping query values:
 https://github.com/mysqljs/mysql#escaping-query-values (Placeholders: https://mariadb.com/kb/en/connector-nodejs-promise-api/)
 
+# Broken Encryption
+Möglich wegen veraltetem Hashalgorythmus (SHA256) und weil kein Salt verwendet wird sind alle hashes deterministisch 
 
 # Cross-Site Scripting
 Reflected XSS
@@ -44,9 +46,6 @@ To start the brute-force script navigate to the "Attacks" directory and preform 
 python -m pip install selenium
 python brute-force.py -u admin -t http://localhost:8081/loginPage -p passwords.txt
 ```
-
-# Broken Encryption
-Möglich wegen veraltetem Hashalgorythmus (SHA256) und weil kein Salt verwendet wird sind alle hashes deterministisch 
 
 # HTML Injections
 (Phishing)
